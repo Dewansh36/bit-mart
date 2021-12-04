@@ -282,3 +282,8 @@ h6 span {
   width: auto;
   display: block;
 }
+h2 {
+  text-align: center;
+  color: #c4c3ca;
+  text-decoration: underline;
+}
