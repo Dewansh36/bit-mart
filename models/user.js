@@ -8,28 +8,27 @@ const userSchema=new mongoose.Schema(
             type: String,
             required: true
         },
-        mob:
-        {
-            type: Number,
-        },
-        email:
-        {
-            type: String,
-            required: true
-        },
         roll:
         {
             type: String,
             required: true
         },
-        batch_year:
-        {
-            type: Number
-        }
+        articles: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'article'
+            }
+        ],
+        orders: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'order'
+            }
+        ],
     }
 );
 
-userSchema.plugin(passportLocalMongoose);
+userSchema.plugin(passportLocalMongoose, { usernameField: 'email' });
 
 const User=new mongoose.model('User', userSchema);
 

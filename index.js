@@ -7,7 +7,11 @@ const flash=require('connect-flash');
 const passport=require('passport');
 const localStrat=require('passport-local');
 const path=require('path');
+const methodOverride=require('method-override');
 const User=require('./models/user');
+const Apperror=require('./utils/errorClass');
+app.use(express.urlencoded({ extended: true }));
+
 
 async function main() {
     mongoose.connect('mongodb://localhost:27017/BitMart');
@@ -35,89 +39,145 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({ secret: 'Enter Secret Here', saveUninitialized: true, resave: false }));
 
+// Configuring Flash
+
+app.use(flash());
+
+//Setting Locals
+
+app.use((req, res, next) => {
+    res.locals.success=req.flash('success');
+    res.locals.error=req.flash('error');
+    res.locals.user=req.user;
+    next();
+});
+
 //Passport configure
 
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(new localStrat('User', User.Userauthenticate()));
+passport.use(new localStrat({
+    usernameField: 'email'
+}, User.authenticate()));
 
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+// Method Override for Other Types of Requests like put ,delete etc
+
+app.use(methodOverride('_method'));
+
+// Catch All Async errors
 
 //Home and Front Pages
 
 app.get('/', (req, res, next) => {
 
-    res.send('Home!');
+    res.render('home');
+    // res.send(res.locals.success);
     //This is real res.render('home');
 });
 
 //Registration Login Logout Routes
 
-app.get('/register', async (req, res, next) => {
-    res.render('users/registration');
+app.get('/signin', async (req, res, next) => {
+    // console.log(req.flash('success'));
+    res.render('user/login');
 });
 
 
 app.post('/register', async (req, res, next) => {
     try {
-        if (req.body.password!=req.body.cpass) {
-            res.redirect('/register');
-        }
+        console.log(req.body);
+        // res.send(req.body);
         const user=new User(
             {
-                username: req.body.username,
+                name: req.body.name,
                 email: req.body.email,
-                name: req.body.firstname+req.body.lastname,
-                mob: req.body.mob,
-                batch_year: req.body.batchyear,
                 roll: req.body.roll
             }
         );
-        // console.log(req.body);
-        // console.log(newUser, req.body);
 
+        // res.send(user);
         const regUser=await User.register(user, req.body.password);
 
         console.log(regUser);
+        // res.send(regUser);
 
         req.logIn(regUser, (err) => {
             if (err) {
                 console.log(err);
-                res.redirect('/login');
+                req.flash('error', err.message);
+                res.redirect('/signin');
             }
         });
-        // req.flash('success', 'Successfully Registered!');
+        req.flash('success', 'Successfully Registered!');
         const curUser=regUser;
         // console.log(curUser);
-        res.render('selectPage', { curUser });
+        res.send(curUser);
+        // res.render('selectPage', { curUser });
     }
     catch (err) {
         console.log(err);
-        res.redirect('/register');
+        req.flash('error', err.message);
+        res.redirect('/signin');
     }
 });
 
-app.get('/login', (req, res, next) => {
-    res.render('users/login');
-});
 
-app.post('/login', passport.authenticate('local', { failureFlash: false, failureRedirect: '/login' }), (req, res, next) => {
+app.post('/login', passport.authenticate('local', { failureFlash: true, failureRedirect: '/signin' }), (req, res, next) => {
 
     const curUser=req.user;
     console.log(curUser);
-    res.render('selectPage', { curUser });
+    req.flash('success', 'Welcome Back!');
+    res.send(curUser);
+    // res.render('selectPage', { curUser });
 });
 
 app.get('/logout', (req, res, next) => {
     req.logOut();
+    req.flash('success', 'Aloha! See You Soon');
     res.redirect('/');
 });
 
+//User Profile Routes
+
+app.get('/users/:id', async (req, res, next) => {
+    let { id }=req.params;
+    const user=await User.findById(id)
+        .populate('articles')
+        .populate('orders');
+    res.send(user);
+});
+
+app.get('/users/:id/edit', async (req, res, next) => {
+    let { id }=req.params;
+    const user=await User.findById(id);
+    console.log(user);
+    res.render('user/edit', { user });
+});
+
+app.put('/users/:id', async (req, res, next) => {
+    let { id }=req.params;
+    const user=await User.findByIdAndUpdate(id, req.body, { runValidators: true, new: true });
+    req.flash('success', 'Successfully Updated User Details!');
+    res.redirect(`/`);
+});
+
+app.delete('/users/:id', async (req, res, next) => {
+    let { id }=req.params;
+    await User.findByIdAndDelete(id);
+    req.flash('success', 'Successfully Deleted User!');
+    res.redirect('/');
+});
+
+app.use((err, req, res, next) => {
+    let { message, status }=err;
+    res.status(status).send(message);
+});
 
 app.get('*', (req, res, next) => {
-    res.send('404 NOT FOUND!');
+    throw new Apperror('Not Found', 404);
 });
 
 
