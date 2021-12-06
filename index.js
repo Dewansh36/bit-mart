@@ -12,6 +12,7 @@ const User=require('./models/user');
 const Apperror=require('./utils/errorClass');
 app.use(express.urlencoded({ extended: true }));
 
+require('dotenv').config();
 
 async function main() {
     mongoose.connect('mongodb://localhost:27017/BitMart');
@@ -24,6 +25,10 @@ main()
     .catch((error) => {
         console.log(error);
     });
+
+app.listen(3000, () => {
+    console.log('Listning on Port 3000');
+});
 
 //Setting ejs and views Directory
 
@@ -67,109 +72,20 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use(methodOverride('_method'));
 
-// Catch All Async errors
-
 //Home and Front Pages
 
 app.get('/', (req, res, next) => {
 
     res.render('home');
-    // res.send(res.locals.success);
     //This is real res.render('home');
 });
 
-//Registration Login Logout Routes
+const loginRoutes=require('./routes/loginRoutes');
+const userRoutes=require('./routes/userRoutes');
 
-app.get('/signin', async (req, res, next) => {
-    // console.log(req.flash('success'));
-    res.render('user/login');
-});
+app.use('/', loginRoutes);
 
-
-app.post('/register', async (req, res, next) => {
-    try {
-        console.log(req.body);
-        // res.send(req.body);
-        const user=new User(
-            {
-                name: req.body.name,
-                email: req.body.email,
-                roll: req.body.roll
-            }
-        );
-
-        // res.send(user);
-        const regUser=await User.register(user, req.body.password);
-
-        console.log(regUser);
-        // res.send(regUser);
-
-        req.logIn(regUser, (err) => {
-            if (err) {
-                console.log(err);
-                req.flash('error', err.message);
-                res.redirect('/signin');
-            }
-        });
-        req.flash('success', 'Successfully Registered!');
-        const curUser=regUser;
-        // console.log(curUser);
-        res.send(curUser);
-        // res.render('selectPage', { curUser });
-    }
-    catch (err) {
-        console.log(err);
-        req.flash('error', err.message);
-        res.redirect('/signin');
-    }
-});
-
-
-app.post('/login', passport.authenticate('local', { failureFlash: true, failureRedirect: '/signin' }), (req, res, next) => {
-
-    const curUser=req.user;
-    console.log(curUser);
-    req.flash('success', 'Welcome Back!');
-    res.send(curUser);
-    // res.render('selectPage', { curUser });
-});
-
-app.get('/logout', (req, res, next) => {
-    req.logOut();
-    req.flash('success', 'Aloha! See You Soon');
-    res.redirect('/');
-});
-
-//User Profile Routes
-
-app.get('/users/:id', async (req, res, next) => {
-    let { id }=req.params;
-    const user=await User.findById(id)
-        .populate('articles')
-        .populate('orders');
-    res.send(user);
-});
-
-app.get('/users/:id/edit', async (req, res, next) => {
-    let { id }=req.params;
-    const user=await User.findById(id);
-    console.log(user);
-    res.render('user/edit', { user });
-});
-
-app.put('/users/:id', async (req, res, next) => {
-    let { id }=req.params;
-    const user=await User.findByIdAndUpdate(id, req.body, { runValidators: true, new: true });
-    req.flash('success', 'Successfully Updated User Details!');
-    res.redirect(`/`);
-});
-
-app.delete('/users/:id', async (req, res, next) => {
-    let { id }=req.params;
-    await User.findByIdAndDelete(id);
-    req.flash('success', 'Successfully Deleted User!');
-    res.redirect('/');
-});
+app.use('/users', userRoutes);
 
 app.use((err, req, res, next) => {
     let { message, status }=err;
@@ -180,7 +96,3 @@ app.get('*', (req, res, next) => {
     throw new Apperror('Not Found', 404);
 });
 
-
-app.listen(3000, () => {
-    console.log('Listning on Port 3000');
-});
