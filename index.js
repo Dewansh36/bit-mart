@@ -14,10 +14,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
 
 const dotenv = require('dotenv');
-dotenv.config({ path: 'backend/config/config.env' })
+dotenv.config({ path: './config/config.env' })
 
 async function main() {
-    mongoose.connect("mongodb://localhost:27017/BitMart");
+    mongoose.connect(process.env.DB_URL)
 }
 
 main()
@@ -28,8 +28,9 @@ main()
         console.log(error);
     });
 
-app.listen(3000, () => {
-    console.log(`Listning on http://localhost:3000`);
+    // console.log(process.env.PORT);
+app.listen(process.env.PORT, () => {
+    console.log(`Listning on http://localhost:${process.env.PORT}`);
 });
 
 //Setting ejs and views Directory
