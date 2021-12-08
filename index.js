@@ -11,11 +11,13 @@ const methodOverride=require('method-override');
 const User=require('./models/user');
 const Apperror=require('./utils/errorClass');
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json())
 
-require('dotenv').config();
+const dotenv = require('dotenv');
+dotenv.config({ path: 'backend/config/config.env' })
 
 async function main() {
-    mongoose.connect('mongodb://localhost:27017/BitMart');
+    mongoose.connect("mongodb://localhost:27017/BitMart");
 }
 
 main()
@@ -27,7 +29,7 @@ main()
     });
 
 app.listen(3000, () => {
-    console.log('Listning on Port 3000');
+    console.log(`Listning on http://localhost:3000`);
 });
 
 //Setting ejs and views Directory
@@ -82,6 +84,12 @@ app.get('/', (req, res, next) => {
 
 const loginRoutes=require('./routes/loginRoutes');
 const userRoutes=require('./routes/userRoutes');
+const product = require('./routes/productRoute')
+const errorMiddleware = require('./middleware/error')
+
+app.use('/api/v1', product)
+app.use(errorMiddleware)
+
 
 app.use('/', loginRoutes);
 
