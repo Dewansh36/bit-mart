@@ -86,9 +86,11 @@ app.get('/', (req, res, next) => {
 const loginRoutes=require('./routes/loginRoutes');
 const userRoutes=require('./routes/userRoutes');
 const product = require('./routes/productRoute')
+const order = require('./routes/orderRoute')
 const errorMiddleware = require('./middleware/error')
 
 app.use('/api/v1', product)
+app.use('/api/v1', order)
 app.use(errorMiddleware)
 
 

@@ -4,9 +4,9 @@ const Features = require('../utils/features')
 const catchAsyncerror = require('../middleware/catchAsyncerror')
 
 exports.createProduct = catchAsyncerror(async (req, res, next) => {
-  console.log(req.body)
+  console.log(req.user)
+  req.body.user = req.user.id;
   const product = await Product.create(req.body)
-  product.creator = req.user.id;
   await product.save();
   res.status(201).json({
     success: true,

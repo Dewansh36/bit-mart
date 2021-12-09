@@ -59,8 +59,8 @@ const productSchema = new mongoose.Schema({
         type:Date,
         default:Date.now
      },
-     creator:{
-       type:mongoose.Schema.Types.ObjectId,
+     user:{
+       type:mongoose.Schema.ObjectId,
        ref:"User"
      }
   }],
