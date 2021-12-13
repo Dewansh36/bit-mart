@@ -85,10 +85,19 @@ app.get('/', (req, res, next) => {
 
 const loginRoutes=require('./routes/loginRoutes');
 const userRoutes=require('./routes/userRoutes');
+<<<<<<< HEAD
 const product=require('./routes/productRoute')
 const errorMiddleware=require('./middleware/error')
 
 app.use('/products', product);
+=======
+const product = require('./routes/productRoute')
+const order = require('./routes/orderRoute')
+const errorMiddleware = require('./middleware/error')
+
+app.use('/api/v1', product)
+app.use('/api/v1', order)
+>>>>>>> 73311ce762a7896c18a12aa855285e931c17d2cf
 app.use(errorMiddleware)
 
 
