@@ -13,7 +13,7 @@ const userSchema=new mongoose.Schema(
             type: String,
             required: true
         },
-        articles: [
+        products: [
             {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: 'article'
@@ -25,6 +25,8 @@ const userSchema=new mongoose.Schema(
                 ref: 'order'
             }
         ],
+        resetPasswordToken: String,
+        resetPasswordExpires: Date
     }
 );
 

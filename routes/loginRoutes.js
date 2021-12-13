@@ -1,7 +1,7 @@
 const express=require('express');
 const app=express();
 const passport=require('passport');
-const router=express.Router();
+const router=express.Router({ mergeParams: true });
 const login=require('../controllers/loginController');
 
 
@@ -16,6 +16,14 @@ router.route('/register')
 
 router.route('/logout')
     .get(login.logout);
+
+router.route('/forgot')
+    .get(login.renderForgot)
+    .post(login.forgot);
+
+router.route('/reset/:token')
+    .get(login.renderReset)
+    .post(login.reset);
 
 module.exports=router;
 

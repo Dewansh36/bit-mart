@@ -13,8 +13,8 @@ const Apperror=require('./utils/errorClass');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
 
-const dotenv = require('dotenv');
-dotenv.config({ path: './config/config.env' })
+const dotenv=require('dotenv');
+dotenv.config();
 
 async function main() {
     mongoose.connect(process.env.DB_URL)
@@ -28,7 +28,7 @@ main()
         console.log(error);
     });
 
-    // console.log(process.env.PORT);
+// console.log(process.env.PORT);
 app.listen(process.env.PORT, () => {
     console.log(`Listning on http://localhost:${process.env.PORT}`);
 });
@@ -85,10 +85,10 @@ app.get('/', (req, res, next) => {
 
 const loginRoutes=require('./routes/loginRoutes');
 const userRoutes=require('./routes/userRoutes');
-const product = require('./routes/productRoute')
-const errorMiddleware = require('./middleware/error')
+const product=require('./routes/productRoute')
+const errorMiddleware=require('./middleware/error')
 
-app.use('/api/v1', product)
+app.use('/products', product);
 app.use(errorMiddleware)
 
 
