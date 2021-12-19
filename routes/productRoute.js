@@ -1,11 +1,21 @@
-const express = require("express");
-const { getAllProducts, createProduct, getProductDetails, updateProduct, deleteProduct } = require("../controllers/productController");
+const express=require("express");
+const { getAllProducts, createProduct, getProductDetails, updateProduct, deleteProduct, renderCreate, renderEdit }=require("../controllers/productController");
+const checkLogin=require('../middleware/checkLogin');
+const checkAuth=require('../middleware/checkProductAuth');
+const router=express.Router({ mergeParams: true });
+const multer=require('multer');
+const { storage }=require('../cloudinary/config');
+const upload=multer({ storage });
 
-const router = express.Router();
-
-router.route("/products").get(getAllProducts)
-router.route("/product/new").post(createProduct)
-router.route("/product/:id").get(getProductDetails).put(updateProduct).delete(deleteProduct)
-
-
-module.exports = router
+router.route("/")
+    .get(getAllProducts);
+router.route("/new")
+    .get(checkLogin, renderCreate)
+    .post(checkLogin, upload.array('images'), createProduct);
+router.route("/:id")
+    .get(getProductDetails)
+    .put(checkLogin, checkAuth, upload.array('images'), updateProduct)
+    .delete(checkLogin, checkAuth, deleteProduct);
+router.route("/:id/edit")
+    .get(checkLogin, checkAuth, renderEdit);
+module.exports=router;

@@ -10,14 +10,17 @@ const path=require('path');
 const methodOverride=require('method-override');
 const User=require('./models/user');
 const Apperror=require('./utils/errorClass');
+require('dotenv').config();
+const { nanoid }=require('nanoid');
+const nodemailer=require('nodemailer');
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json())
+app.use(express.json());
 
 const dotenv=require('dotenv');
-dotenv.config();
-
+dotenv.config({})
+const db_url=process.env.db_url;
 async function main() {
-    mongoose.connect(process.env.DB_URL)
+    mongoose.connect(db_url);
 }
 
 main()
@@ -28,11 +31,10 @@ main()
         console.log(error);
     });
 
-// console.log(process.env.PORT);
-app.listen(process.env.PORT, () => {
-    console.log(`Listning on http://localhost:${process.env.PORT}`);
+const port=process.env.PORT;
+app.listen(port, () => {
+    console.log(`Listning on ${port}`);
 });
-
 //Setting ejs and views Directory
 
 app.engine('ejs', ejsmate);
@@ -50,16 +52,6 @@ app.use(session({ secret: 'Enter Secret Here', saveUninitialized: true, resave: 
 // Configuring Flash
 
 app.use(flash());
-
-//Setting Locals
-
-app.use((req, res, next) => {
-    res.locals.success=req.flash('success');
-    res.locals.error=req.flash('error');
-    res.locals.user=req.user;
-    next();
-});
-
 //Passport configure
 
 app.use(passport.initialize());
@@ -71,6 +63,17 @@ passport.use(new localStrat({
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+
+//Setting Locals
+
+app.use((req, res, next) => {
+    res.locals.success=req.flash('success');
+    res.locals.error=req.flash('error');
+    res.locals.user=req.user;
+    next();
+});
+
+
 // Method Override for Other Types of Requests like put ,delete etc
 
 app.use(methodOverride('_method'));
@@ -78,39 +81,34 @@ app.use(methodOverride('_method'));
 //Home and Front Pages
 
 app.get('/', (req, res, next) => {
-
     res.render('home');
     //This is real res.render('home');
 });
 
 const loginRoutes=require('./routes/loginRoutes');
 const userRoutes=require('./routes/userRoutes');
-<<<<<<< HEAD
-const product=require('./routes/productRoute')
+const product=require('./routes/productRoute');
+const reviewRoute=require('./routes/reviewRoutes');
 const errorMiddleware=require('./middleware/error')
-
-app.use('/products', product);
-=======
-const product = require('./routes/productRoute')
-const order = require('./routes/orderRoute')
-const errorMiddleware = require('./middleware/error')
-
-app.use('/api/v1', product)
-app.use('/api/v1', order)
->>>>>>> 73311ce762a7896c18a12aa855285e931c17d2cf
-app.use(errorMiddleware)
 
 
 app.use('/', loginRoutes);
 
 app.use('/users', userRoutes);
 
+app.use('/products', product)
+app.use('/products/:id/reviews', reviewRoute);
+
+app.use(errorMiddleware)
+
+
+app.get('*', (req, res, next) => {
+    throw new Apperror('Not Found', 404);
+});
+
 app.use((err, req, res, next) => {
     let { message, status }=err;
     res.status(status).send(message);
 });
 
-app.get('*', (req, res, next) => {
-    throw new Apperror('Not Found', 404);
-});
 

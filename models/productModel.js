@@ -1,6 +1,19 @@
-const mongoose = require('mongoose')
+const mongoose=require('mongoose')
+const User=require('./user');
 
-const productSchema = new mongoose.Schema({
+const imageSchema=new mongoose.Schema({
+  public_id: {
+    type: String,
+    required: true,
+  },
+  url: {
+    type: String,
+    required: true,
+  },
+}
+);
+
+const productSchema=new mongoose.Schema({
   name: {
     type: String,
     required: [true, 'Please enter product name'],
@@ -17,21 +30,14 @@ const productSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
-  images: [
-    {
-      public_id: {
-        type: String,
-        required: true,
-      },
-      url: {
-        type: String,
-        required: true,
-      },
-    },
-  ],
+  images: [imageSchema],
   category: {
     type: String,
     required: [true, 'Please enter product category'],
+  },
+  type: {
+    type: String,
+    required: [true, 'Please Choose Buy Or Sell']
   },
   quantity: {
     type: Number,
@@ -42,28 +48,18 @@ const productSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
-  Reviews: [{
-     name:{
-        type:String,
-        required:true,
-     },
-     rating:{
-        type:Number,
-        required:true
-     },
-     comment:{
-        type:String,
-        required:true
-     },
-     createdAt:{
-        type:Date,
-        default:Date.now
-     },
-     user:{
-       type:mongoose.Schema.ObjectId,
-       ref:"User"
-     }
-  }],
-})
+  creator:
+  {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: [true, 'Creator Not Specified']
+  },
+  reviews: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Review'
+    }
+  ],
+});
 
-module.exports = mongoose.model("Products",productSchema)
+module.exports=mongoose.model("Products", productSchema);
