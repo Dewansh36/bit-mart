@@ -9,6 +9,8 @@ const upload=multer({ storage });
 
 router.route("/")
     .get(getAllProducts);
+// router.route('/search')
+//     .get(getAllProducts);
 router.route("/new")
     .get(checkLogin, renderCreate)
     .post(checkLogin, upload.array('images'), createProduct);
@@ -18,4 +20,5 @@ router.route("/:id")
     .delete(checkLogin, checkAuth, deleteProduct);
 router.route("/:id/edit")
     .get(checkLogin, checkAuth, renderEdit);
+
 module.exports=router;

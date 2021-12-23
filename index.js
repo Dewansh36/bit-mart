@@ -78,14 +78,6 @@ app.use((req, res, next) => {
 
 app.use(methodOverride('_method'));
 
-//Home and Front Pages
-
-app.get('/', async (req, res, next) => {
-    const products=await Product.find()
-        .populate('images');
-    res.render('home', { products });
-    //This is real res.render('home');
-});
 
 const loginRoutes=require('./routes/loginRoutes');
 const userRoutes=require('./routes/userRoutes');
@@ -95,6 +87,14 @@ const cartRoute=require('./routes/cartRoutes');
 const wishlistRoute=require('./routes/wishlistRoutes');
 const errorMiddleware=require('./middleware/error')
 
+//Home and Front Pages
+
+app.get('/', async (req, res, next) => {
+    const products=await Product.find()
+        .populate('images');
+    res.render('home', { products });
+    //This is real res.render('home');
+});
 
 app.use('/', loginRoutes);
 

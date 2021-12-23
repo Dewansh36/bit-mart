@@ -53,7 +53,9 @@ exports.getAllProducts=catchAsyncerror(async (req, res, next) => {
     .filter()
     .pagination(resultperpage)
   const product=await features.query
-
+  // res.send(req.query);
+  // const product=await partialSearch(req.query.keyword);
+  console.log(product);
   if (!product) {
     return next(new Apperror('Product not found', 404))
   }
