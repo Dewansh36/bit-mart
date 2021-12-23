@@ -6,6 +6,9 @@ const Product=require('../models/productModel');
 module.exports.addProduct=async (req, res, next) => {
     let { id }=req.params;
     let { quantity }=req.query;
+    if (quantity==undefined) {
+        quantity=1;
+    }
     const user=await User.findById(req.user.id)
         .populate('cartItems');
     const product=await Product.findById(id);

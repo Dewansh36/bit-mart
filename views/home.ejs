@@ -169,82 +169,113 @@
             <span>Select from premium product and save plenty money</span>
           </div>
           <div class="product-layout">
-            <div class="product">
-              <div class="img-container">
-                <img src="/images/item-2.jpg" alt="">
-                <div class="addCart">
-                  <i class="fas fa-shopping-cart"></i>
+            <% for( let index=0; index < Math.min(products.length,8); index++ ) { %>
+              <div class="product">
+                <div class="img-container">
+                  <img src="<%=products[index].images[0].url  %> " alt="">
+                  <div class="addCart">
+                    <form action="/cart/<%= products[index].id %> " method="get">
+                      <button class="btn"><i class="fas fa-shopping-cart"></i></button>
+                    </form>
+                  </div>
+                  <ul class="side-icons">
+                    <form class="mb-2" action="#" method="get">
+                      <button class="btn"><span><i class="fas fa-search"></i></span></button>
+                    </form>
+                    <form class="mt-2" action="/wishlist/<%= products[index].id %> " method="get">
+                      <button class="btn"><span><i class="fas fa-heart"></i></span></button>
+                    </form>
+                    <!-- <span><i class="fas fa-sliders-h"></i></span> -->
+                  </ul>
                 </div>
-                <ul class="side-icons">
-                  <span><i class="fas fa-search"></i></span>
-                  <span><i class="fas fa-heart"></i></span>
-                  <span><i class="fas fa-sliders-h"></i></span>
-                </ul>
-              </div>
-              <div class="bottom">
-                <a href="#">Shoes</a>
-                <div class="price">
-                  <span>Rs 2000</span>
-                </div>
-              </div>
-            </div>
-            <div class="product">
-              <div class="img-container">
-                <img src="/images/item-2.jpg" alt="">
-                <div class="addCart">
-                  <i class="fas fa-shopping-cart"></i>
-                </div>
-                <ul class="side-icons">
-                  <span><i class="fas fa-search"></i></span>
-                  <span><i class="fas fa-heart"></i></span>
-                  <span><i class="fas fa-sliders-h"></i></span>
-                </ul>
-              </div>
-              <div class="bottom">
-                <a href="#">Shoes</a>
-                <div class="price">
-                  <span>Rs 2000</span>
+                <div class="bottom">
+                  <a href="/products/<%= products[index].id %> ">
+                    <%= products[index].name %>
+                  </a>
+                  <div class="price">
+                    <span>
+                      <%= products[index].price %>
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="product">
-              <div class="img-container">
-                <img src="/images/item-2.jpg" alt="">
-                <div class="addCart">
-                  <i class="fas fa-shopping-cart"></i>
+              <% } %>
+                <div class="product">
+                  <div class="img-container">
+                    <img src="/images/item-2.jpg" alt="">
+                    <div class="addCart">
+                      <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <ul class="side-icons">
+                      <span><i class="fas fa-search"></i></span>
+                      <span><i class="fas fa-heart"></i></span>
+                      <!-- <span><i class="fas fa-sliders-h"></i></span> -->
+                    </ul>
+                  </div>
+                  <div class="bottom">
+                    <a href="#">Shoes</a>
+                    <div class="price">
+                      <span>Rs 2000</span>
+                    </div>
+                  </div>
                 </div>
-                <ul class="side-icons">
-                  <span><i class="fas fa-search"></i></span>
-                  <span><i class="fas fa-heart"></i></span>
-                  <span><i class="fas fa-sliders-h"></i></span>
-                </ul>
-              </div>
-              <div class="bottom">
-                <a href="#">Shoes</a>
-                <div class="price">
-                  <span>Rs 2000</span>
+                <div class="product">
+                  <div class="img-container">
+                    <img src="/images/item-2.jpg" alt="">
+                    <div class="addCart">
+                      <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <ul class="side-icons">
+                      <span><i class="fas fa-search"></i></span>
+                      <span><i class="fas fa-heart"></i></span>
+                      <span><i class="fas fa-sliders-h"></i></span>
+                    </ul>
+                  </div>
+                  <div class="bottom">
+                    <a href="#">Shoes</a>
+                    <div class="price">
+                      <span>Rs 2000</span>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div class="product">
-              <div class="img-container">
-                <img src="/images/item-2.jpg" alt="">
-                <div class="addCart">
-                  <i class="fas fa-shopping-cart"></i>
+                <div class="product">
+                  <div class="img-container">
+                    <img src="/images/item-2.jpg" alt="">
+                    <div class="addCart">
+                      <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <ul class="side-icons">
+                      <span><i class="fas fa-search"></i></span>
+                      <span><i class="fas fa-heart"></i></span>
+                      <span><i class="fas fa-sliders-h"></i></span>
+                    </ul>
+                  </div>
+                  <div class="bottom">
+                    <a href="#">Shoes</a>
+                    <div class="price">
+                      <span>Rs 2000</span>
+                    </div>
+                  </div>
                 </div>
-                <ul class="side-icons">
-                  <span><i class="fas fa-search"></i></span>
-                  <span><i class="fas fa-heart"></i></span>
-                  <span><i class="fas fa-sliders-h"></i></span>
-                </ul>
-              </div>
-              <div class="bottom">
-                <a href="#">Shoes</a>
-                <div class="price">
-                  <span>Rs 2000</span>
+                <div class="product">
+                  <div class="img-container">
+                    <img src="/images/item-2.jpg" alt="">
+                    <div class="addCart">
+                      <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <ul class="side-icons">
+                      <span><i class="fas fa-search"></i></span>
+                      <span><i class="fas fa-heart"></i></span>
+                      <span><i class="fas fa-sliders-h"></i></span>
+                    </ul>
+                  </div>
+                  <div class="bottom">
+                    <a href="#">Shoes</a>
+                    <div class="price">
+                      <span>Rs 2000</span>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
           </div>
         </section>
       </main>

@@ -269,7 +269,7 @@ body {
 .product .side-icons {
   position: absolute;
   right: 0;
-  top: 36%;
+  top: 30%;
 
   transform: translate(80%, -50%);
   display: flex;

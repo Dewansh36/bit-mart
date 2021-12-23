@@ -9,6 +9,7 @@ const localStrat=require('passport-local');
 const path=require('path');
 const methodOverride=require('method-override');
 const User=require('./models/user');
+const Product=require('./models/productModel');
 const Apperror=require('./utils/errorClass');
 require('dotenv').config();
 const { nanoid }=require('nanoid');
@@ -79,8 +80,10 @@ app.use(methodOverride('_method'));
 
 //Home and Front Pages
 
-app.get('/', (req, res, next) => {
-    res.render('home');
+app.get('/', async (req, res, next) => {
+    const products=await Product.find()
+        .populate('images');
+    res.render('home', { products });
     //This is real res.render('home');
 });
 

@@ -4,10 +4,10 @@ const Product=require('../models/productModel');
 
 module.exports.addProduct=async (req, res, next) => {
     let { id }=req.params;
-    const user=await User.findById(req.user.id)
+    let user=await User.findById(req.user.id)
         .populate('wishList');
-    const product=await Product.findById(id);
-    const flag=false;
+    let product=await Product.findById(id);
+    let flag=false;
     for (let i=0; i<user.wishList.length; i++) {
         if (user.wishList[i].id==id) {
             flag=true;
