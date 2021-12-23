@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900");
 
-body {
+main {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -11,14 +11,6 @@ body {
   color: #c4c3ca;
   background-color: #1f2029;
   overflow-x: hidden;
-}
-#product
-{
-    background-color: #2a2b38;
-  background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat.svg");
-  background-position: bottom center;
-  background-repeat: no-repeat;
-  background-size: 300%;
 }
 .product-editor form
 {
@@ -270,4 +262,16 @@ input
 .product-detail h4
 {
     color: #c4c3ca;
+}
+#carousel
+{
+    width: 50%;
+}
+#product
+{
+    background-color: #2a2b38;
+    background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat.svg");
+    background-position: bottom center;
+    background-repeat: no-repeat;
+    background-size: 300%;
 }

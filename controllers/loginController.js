@@ -60,9 +60,9 @@ module.exports.register=async (req, res, next) => {
 module.exports.login=(req, res, next) => {
 
     const curUser=req.user;
+    req.flash('success', 'Welcome Back!');
     // console.log(curUser);
-    res.send(curUser);
-    // res.render('selectPage', { curUser });
+    res.redirect('/');
 }
 
 module.exports.renderForgot=(req, res, next) => {
@@ -121,7 +121,7 @@ module.exports.reset=async (req, res, next) => {
     }
     let { password }=req.body;
     const user=await User.findOne({ resetPasswordToken: req.params.token });
-    console.log(user);
+    console.log(user, password);
     await user.setPassword(password);
     await user.save();
     const resetEmail={

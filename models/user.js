@@ -1,4 +1,5 @@
 const mongoose=require('mongoose');
+const Cart=require('../models/cartModel');
 const passportLocalMongoose=require('passport-local-mongoose');
 
 
@@ -16,7 +17,7 @@ const userSchema=new mongoose.Schema(
         products: [
             {
                 type: mongoose.Schema.Types.ObjectId,
-                ref: 'article'
+                ref: 'Products'
             }
         ],
         orders: [
@@ -25,6 +26,18 @@ const userSchema=new mongoose.Schema(
                 ref: 'order'
             }
         ],
+        cartItems: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Cart'
+        }],
+        wishList: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Products'
+        }],
+        coins: {
+            type: Number,
+            default: 2000
+        },
         resetPasswordToken: String,
         resetPasswordExpires: Date
     }

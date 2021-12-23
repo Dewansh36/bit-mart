@@ -18,9 +18,9 @@ app.use(express.json());
 
 const dotenv=require('dotenv');
 dotenv.config({})
-const db_url=process.env.db_url;
+
 async function main() {
-    mongoose.connect(db_url);
+    mongoose.connect('mongodb://localhost:27017/BitMart');
 }
 
 main()
@@ -31,9 +31,8 @@ main()
         console.log(error);
     });
 
-const port=process.env.PORT;
-app.listen(port, () => {
-    console.log(`Listning on ${port}`);
+app.listen(3000, () => {
+    console.log('Listning on Port 3000');
 });
 //Setting ejs and views Directory
 
@@ -89,6 +88,8 @@ const loginRoutes=require('./routes/loginRoutes');
 const userRoutes=require('./routes/userRoutes');
 const product=require('./routes/productRoute');
 const reviewRoute=require('./routes/reviewRoutes');
+const cartRoute=require('./routes/cartRoutes');
+const wishlistRoute=require('./routes/wishlistRoutes');
 const errorMiddleware=require('./middleware/error')
 
 
@@ -96,8 +97,13 @@ app.use('/', loginRoutes);
 
 app.use('/users', userRoutes);
 
-app.use('/products', product)
+app.use('/products', product);
+
 app.use('/products/:id/reviews', reviewRoute);
+
+app.use('/cart', cartRoute);
+
+app.use('/wishlist', wishlistRoute);
 
 app.use(errorMiddleware)
 

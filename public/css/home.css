@@ -33,44 +33,6 @@ body {
 .lightblue {
   background-color: lightblue;
 }
-.logo {
-  height: 10vh;
-}
-.navbar {
-  font-size: 16px;
-  background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat.svg");
-  background-color: #2a2b38;
-}
-.navbar i {
-  font-size: 1.2rem;
-  padding: 0 7px;
-  cursor: pointer;
-  /* font-weight: 300; */
-  transition: 0.3s ease;
-}
-.navbar i {
-  color: rgb(32, 169, 211);
-  font-size: 2rem;
-  margin: auto auto;
-}
-.navbar i:hover,
-.navbar i:active {
-  color: var(--primary-color);
-}
-.navbar-toggler-icon {
-  background-color: var(--primary-color);
-  /* color: rgb(32, 169, 211); */
-}
-.navbar-light .navbar-nav .nav-link {
-  padding: 0 20px;
-  color: rgb(32, 169, 211);
-  transition: 0.3s ease;
-  font-size: 1.5rem;
-}
-.navbar-light .navbar-nav .nav-link:hover,
-.navbar-light .navbar-nav .nav-link:active {
-  color: var(--primary-color);
-}
 .site-slider {
   position: relative;
 }

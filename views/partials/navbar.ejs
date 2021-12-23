@@ -1,0 +1,52 @@
+<nav class="navbar navbar-expand-lg navbar-light py-3">
+    <div class="container-fluid">
+        <a href="#"><img class="logo"
+                src="https://res.cloudinary.com/dewansh/image/upload/v1640249732/BitMart/Products/logo_o51iju.png"
+                alt="logo">
+        </a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
+            <form action="/search" class="d-flex mx-auto" method="get">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search For Products,Seller and More"
+                        aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <div class="input-group-append">
+                        <button class="btn" type="button" id="button-addon2"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+            </form>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">HOME<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/products">BUY/RENT<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/products/new">SELL<span class="sr-only">(current)</span></a>
+                </li>
+                <% if (user==undefined) { %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/signin">SIGN IN<span class="sr-only">(current)</span></a>
+                    </li>
+                    <% } else { %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout">LOG OUT<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/cart"><i class="fas fa-shopping-cart"></i></a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/wishlist"> <i class="fas fa-heart"></i></a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/users/<%= user.id %> "><i class="fas fa-user"></i></a>
+                        </li>
+                        <% } %>
+            </ul>
+        </div>
+    </div>
+</nav>

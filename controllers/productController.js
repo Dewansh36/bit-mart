@@ -6,13 +6,13 @@ const catchAsyncerror=require('../middleware/catchAsyncerror')
 const multer=require('multer');
 
 exports.renderCreate=(req, res, next) => {
-  res.render('product/sell');
+  res.render('products/sell');
 }
 
 exports.renderEdit=async (req, res, next) => {
   let { id }=req.params;
   const product=await Product.findById(id);
-  res.render('product/edit', { product });
+  res.render('products/edit', { product });
 }
 
 exports.createProduct=catchAsyncerror(async (req, res, next) => {
@@ -33,12 +33,12 @@ exports.createProduct=catchAsyncerror(async (req, res, next) => {
     await product.save();
     await user.save();
     console.log(user, product);
-    // // req.flash('success', 'Product Created!');
-    // // res.redirect(`/products/:${product.id}`);
-    res.status(201).json({
-      success: true,
-      product,
-    })
+    req.flash('success', 'Product Created!');
+    res.redirect(`/products/${product.id}`, { product });
+    // res.status(201).json({
+    //   success: true,
+    //   product,
+    // })
   }
   catch (err) {
     req.flash('error', err.message);
@@ -76,7 +76,7 @@ exports.getProductDetails=catchAsyncerror(async (req, res, next) => {
   if (!product) {
     return next(new Apperror('Product not found', 404))
   }
-  res.render('product/view', { product });
+  res.render('products/view', { product });
   // res.status(200).json({
   //   success: true,
   //   product,
@@ -115,13 +115,13 @@ exports.updateProduct=catchAsyncerror(async (req, res, next) => {
       }
       await product.save();
     }
-    // req.flash('success', 'Successfully Updated Product!');
-    // res.redirect(`/products/${product.id}`,{ product }) ;
+    req.flash('success', 'Successfully Updated Product!');
+    res.redirect(`/products/${product.id}`, { product });
 
-    res.status(200).json({
-      success: true,
-      product,
-    })
+    // res.status(200).json({
+    //   success: true,
+    //   product,
+    // })
   }
   catch (err) {
     req.flash('error', err.message);
@@ -131,17 +131,26 @@ exports.updateProduct=catchAsyncerror(async (req, res, next) => {
 
 exports.deleteProduct=catchAsyncerror(async (req, res, next) => {
   const product=await Product.findById(req.params.id)
+  const user=await User.findById(req.user.id)
+    .populate('products');
   if (!product) {
     return res.status(500).json({
       success: false,
       message: 'Product does not exist',
     })
   }
+  for (let i=0; i<user.products.length; i++) {
+    if (user.products[i].id==product.id) {
+      user.products.splice(i, 1);
+      break;
+    }
+  }
+  await user.save();
   await product.remove();
-  // req.flash('success', 'Product Deleted Successfully!');
-  // res.redirect('/');
-  res.status(200).json({
-    success: true,
-    message: 'Product deleted successfully',
-  })
+  req.flash('success', 'Product Deleted Successfully!');
+  res.redirect('/');
+  // res.status(200).json({
+  //   success: true,
+  //   message: 'Product deleted successfully',
+  // })
 })
