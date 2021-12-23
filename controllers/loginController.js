@@ -47,7 +47,8 @@ module.exports.register=async (req, res, next) => {
         req.flash('success', 'Successfully Registered!');
         const curUser=regUser;
         // console.log(curUser);
-        res.send(curUser);
+        // res.send(curUser);
+        res.redirect('/');
         // res.render('selectPage', { curUser });
     }
     catch (err) {

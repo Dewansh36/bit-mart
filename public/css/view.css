@@ -275,3 +275,6 @@ input
     background-repeat: no-repeat;
     background-size: 300%;
 }
+.img-thumbnail{
+    height: 6rem;
+}

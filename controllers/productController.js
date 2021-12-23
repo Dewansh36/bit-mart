@@ -34,7 +34,7 @@ exports.createProduct=catchAsyncerror(async (req, res, next) => {
     await user.save();
     console.log(user, product);
     req.flash('success', 'Product Created!');
-    res.redirect(`/products/${product.id}`, { product });
+    res.redirect(`/products/${product.id}`);
     // res.status(201).json({
     //   success: true,
     //   product,
@@ -113,10 +113,10 @@ exports.updateProduct=catchAsyncerror(async (req, res, next) => {
           }
         }
       }
-      await product.save();
     }
+    await product.save();
     req.flash('success', 'Successfully Updated Product!');
-    res.redirect(`/products/${product.id}`, { product });
+    res.redirect(`/products/${product.id}`);
 
     // res.status(200).json({
     //   success: true,
