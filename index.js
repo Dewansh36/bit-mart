@@ -112,7 +112,7 @@ app.use(errorMiddleware)
 
 
 app.get('*', (req, res, next) => {
-    throw new Apperror('Not Found', 404);
+    res.render('404');
 });
 
 app.use((err, req, res, next) => {

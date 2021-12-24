@@ -52,18 +52,19 @@ exports.getAllProducts=catchAsyncerror(async (req, res, next) => {
     .search()
     .filter()
     .pagination(resultperpage)
-  const product=await features.query
+  const products=await features.query
   // res.send(req.query);
   // const product=await partialSearch(req.query.keyword);
-  console.log(product);
-  if (!product) {
+  console.log(products);
+  if (!products) {
     return next(new Apperror('Product not found', 404))
   }
-  // res.redirect('/products', { product });
-  res.status(200).json({
-    success: true,
-    product,
-  })
+  // res.redirect()
+  res.render('products/product', { products });
+  // res.status(200).json({
+  //   success: true,
+  //   product,
+  // })
 })
 
 exports.getProductDetails=catchAsyncerror(async (req, res, next) => {

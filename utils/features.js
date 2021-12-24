@@ -1,3 +1,4 @@
+// const Product=require('../models/productModel');
 class Features {
   constructor(query, queryStr) {
     ; (this.query=query), (this.queryStr=queryStr)
@@ -16,19 +17,22 @@ class Features {
     return this
   }
   filter() {
-    const strcopy={ ...this.queryStr }
-
-    const removeFields=['keyword', 'page', 'limit']
-
-    removeFields.forEach((key) => delete strcopy[key])
-
-    let queryStr=JSON.stringify(strcopy)
-
-    queryStr=queryStr.replace(/\b(gt|gte|lt|lte)\b/g, key => `$${key}`);
-
-    this.query=this.query.find(JSON.parse(queryStr))
-
-    return this
+    let max=this.queryStr.lte;
+    let min=this.queryStr.gte;
+    let category=this.queryStr.category;
+    if (max==undefined&&category==undefined) {
+      this.query=this.query.find().limit(6);
+    }
+    else if (max==undefined) {
+      this.query=this.query.find({ $and: [{ category: category }] });
+    }
+    else if (category==undefined) {
+      this.query=this.query.find({ $and: [{ price: { $gte: min } }, { price: { $lte: max } }] });
+    }
+    else {
+      this.query=this.query.find({ $and: [{ price: { $gte: min } }, { price: { $lte: max } }, { category: category }] });
+    }
+    return this;
   }
   pagination(resultperpage) {
     const currentpage=Number(this.queryStr.page)||1
