@@ -113,7 +113,7 @@ body {
   box-shadow: 0 4px 8px 0 rgba(21, 21, 21, 0.2);
   transition: all 0.2s ease;
 }
-.btn {
+.b-btn {
   border-radius: 4px;
   height: 44px;
   font-size: 13px;
@@ -141,13 +141,13 @@ body {
   color: #102770;
   box-shadow: 0 8px 24px 0 rgba(255, 235, 167, 0.2);
 }
-.btn:active,
-.btn:focus {
+.b-btn:active,
+.b-btn:focus {
   background-color: #102770;
   color: #ffeba7;
   box-shadow: 0 8px 24px 0 rgba(16, 39, 112, 0.2);
 }
-.btn:hover {
+.b-btn:hover {
   background-color: #102770;
   color: #ffeba7;
   box-shadow: 0 8px 24px 0 rgba(16, 39, 112, 0.2);

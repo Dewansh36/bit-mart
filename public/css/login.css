@@ -40,6 +40,9 @@ h6 span {
   width: 100%;
   display: block;
 }
+.container{
+  height: 90vh;
+}
 .full-height {
   min-height: 100vh;
 }
@@ -116,7 +119,7 @@ h6 span {
   position: absolute;
   border-radius: 6px;
   left: 0;
-  top: 0;
+  top: 25%;
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
   -webkit-backface-visibility: hidden;
@@ -229,7 +232,7 @@ h6 span {
   transition: all 200ms linear;
 }
 
-.btn {
+.b-btn {
   border-radius: 4px;
   height: 44px;
   font-size: 13px;
@@ -257,20 +260,19 @@ h6 span {
   color: #102770;
   box-shadow: 0 8px 24px 0 rgba(255, 235, 167, 0.2);
 }
-.btn:active,
-.btn:focus {
+.b-btn:active,
+.b-btn:focus {
   background-color: #102770;
   color: #ffeba7;
   box-shadow: 0 8px 24px 0 rgba(16, 39, 112, 0.2);
 }
-.btn:hover {
+.b-btn:hover {
   background-color: #102770;
   color: #ffeba7;
   box-shadow: 0 8px 24px 0 rgba(16, 39, 112, 0.2);
 }
 
 .logo {
-  position: absolute;
   top: 30px;
   right: 30px;
   display: block;

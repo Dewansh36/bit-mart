@@ -116,7 +116,7 @@ h6 {
 .m-b-20 {
   margin-bottom: 20px;
 }
-.btn {
+.b-btn {
   border-radius: 4px;
   height: 44px;
   font-size: 13px;
@@ -144,7 +144,7 @@ h6 {
   color: #102770;
   box-shadow: 0 8px 24px 0 rgba(255, 235, 167, 0.2);
 }
-.btn:hover {
+.b-btn:hover {
   background-color: #102770;
   color: #ffeba7;
   box-shadow: 0 8px 24px 0 rgba(16, 39, 112, 0.2);
