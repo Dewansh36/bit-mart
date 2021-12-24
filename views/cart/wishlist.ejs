@@ -18,7 +18,7 @@
 <body>
     <%- include('../partials/flash') %>
         <%- include('../partials/navbar') %>
-            <div class="container">
+            <div class="container" style="height: 100vh;">
                 <h1 style="color: #45ccb8;"> Wish List</h1>
                 <div class="cart">
                     <div class="products">
@@ -48,9 +48,10 @@
                     </div>
                 </div>
             </div>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
-                integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
-                crossorigin="anonymous"></script>
+            <%- include('../partials/footer') %>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+                    integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+                    crossorigin="anonymous"></script>
 </body>
 
 </html>

@@ -9,7 +9,8 @@
         integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/f6f38a44e9.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="/css/cart.css">
-    <link rel="stylesheet" type="text/css" href="/css/navbar.css">
+
+    <!-- <link rel="stylesheet" type="text/css" href="/css/navbar.css"> -->
     <link rel="stylesheet" type="text/css"
         href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -18,7 +19,7 @@
 <body>
     <%- include('../partials/flash') %>
         <%- include('../partials/navbar') %>
-            <div class="container">
+            <div class="container" style="min-height: 100vh;">
                 <h1 style="color: #45ccb8;"> Shopping Cart</h1>
                 <div class="cart">
                     <div class="products">
@@ -74,6 +75,7 @@
                 integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
                 crossorigin="anonymous"></script>
             <script src="/js/cart.js"></script>
+            <%- include('../partials/footer') %>
 </body>
 
 </html>
