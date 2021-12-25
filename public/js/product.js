@@ -39,3 +39,5 @@ rangeInput.forEach(input =>{
         }
     });
 });
+// let prev=document.getElementById(prev)
+// prev.innerText="Previous";

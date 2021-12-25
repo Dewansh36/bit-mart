@@ -47,7 +47,8 @@ exports.createProduct=catchAsyncerror(async (req, res, next) => {
 });
 
 exports.getAllProducts=catchAsyncerror(async (req, res, next) => {
-  const resultperpage=5
+  const resultperpage=6;
+  let sze=(await Product.find()).length;
   const features=new Features(Product.find(), req.query)
     .search()
     .filter()
@@ -55,12 +56,14 @@ exports.getAllProducts=catchAsyncerror(async (req, res, next) => {
   const products=await features.query
   // res.send(req.query);
   // const product=await partialSearch(req.query.keyword);
-  console.log(products);
+  // console.log(products);
+  let currentPage=Number(req.query.page||1);
+  // console.log(sze)
   if (!products) {
     return next(new Apperror('Product not found', 404))
   }
   // res.redirect()
-  res.render('products/product', { products });
+  res.render('products/product', { products,page: currentPage ,mxLength: sze});
   // res.status(200).json({
   //   success: true,
   //   product,
