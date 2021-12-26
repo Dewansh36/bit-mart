@@ -38,7 +38,7 @@ body {
   outline: none;
   border-radius: 0%;
   font-weight: 300;
-  font-size: 1.1vmax;
+  font-size: 1.3rem;
   box-sizing: border-box;
   height: 8%;
 }
@@ -51,11 +51,23 @@ body {
   padding: 1vmax;
   width: 10%;
   font-weight: 300;
-  font-size: 1.1vmax;
+  font-size: 1.3rem;
   cursor: pointer;
   color: white;
   transition: all 0.5s;
 }
 .searchBox > input[type="submit"]:hover {
   background-color: coral;
+}
+@media only screen and (max-width: 967px) {
+  .searchBox > input[type="submit"] {
+    width: 25%;
+    font-size: 1.5rem;
+  }
+  .searchBox > input[type="text"] {
+    font-size: 1.3rem;
+  }
+  .searchBox{
+    top: 0;
+  }
 }

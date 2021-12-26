@@ -99,14 +99,18 @@
             <h2>Category</h2>
             <span>Select from the premium category</span>
           </div>
+          <form action="/products" method="get">
           <div class="category-layout">
+            
             <div class="category-item">
               <img
                 src="https://media.istockphoto.com/photos/hands-holding-smartphone-in-cafe-banking-online-freelancer-picture-id1279503437?b=1&k=20&m=1279503437&s=170667a&w=0&h=umZFDeG_0z0lX0XRu10tlob2nlr5-Gh4VspDI3cPahI="
                 alt="">
               <div class="category-content">
                 <h3>Laptop & Mobiles</h3>
-                <a href="">Shop Now</a>
+                <input id="q_4_laptop" name="category"
+                          type="submit" value="Laptops & Mobiles" hidden>
+                        <label class="b-btn" for="q_4_laptop">Shop now</label>
               </div>
             </div>
 
@@ -116,7 +120,9 @@
                 alt="">
               <div class="category-content">
                 <h3>Books</h3>
-                <a href="">Shop Now</a>
+                <input id="q_4_books" name="category" type="submit"
+                          value="Books" hidden>
+                        <label class="b-btn" for="q_4_books">Shop Now</label>
               </div>
             </div>
 
@@ -126,7 +132,9 @@
                 alt="">
               <div class="category-content">
                 <h3>Furniture</h3>
-                <a href="">Shop Now</a>
+                <input id="q_4_furniture" name="category" type="submit"
+                value="Furniture" hidden>
+              <label class="b-btn" for="q_4_furniture">Shop now</label>
               </div>
             </div>
 
@@ -136,8 +144,10 @@
                 alt="">
               <div class="category-content">
                 <h3>Fashion</h3>
-                <a href="">Shop Now</a>
-              </div>
+                <input id="q_4_fashion" name="category" type="submit"
+                          value="Fashion" hidden>
+                        <label class="b-btn" for="q_4_fashion">Shop Now</label>
+            </div>
             </div>
 
             <div class="category-item">
@@ -146,7 +156,9 @@
                 alt="">
               <div class="category-content">
                 <h3>Electrical devices</h3>
-                <a href="">Shop Now</a>
+                <input id="q_4_electrical" name="category" type="submit"
+                value="Electrical devices" hidden>
+              <label class="b-btn" for="q_4_electrical">Shop Now</label>
               </div>
             </div>
 
@@ -156,11 +168,15 @@
                 alt="">
               <div class="category-content">
                 <h3>Sports gear</h3>
-                <a href="">Shop Now</a>
+                <input id="q_4_sports" name="category" type="submit"
+                          value="Sports gear" hidden>
+                        <label class="b-btn" for="q_4_sports">Shop Now</label>
               </div>
             </div>
 
+            
           </div>
+        </form>
         </section>
         <section class="section products">
           <div class="title ">
@@ -172,7 +188,7 @@
             <% for( let index=0; index < Math.min(products.length,8); index++ ) { %>
               <div class="product">
                 <div class="img-container">
-                  <img src="<%=products[index].images[0].url  %> " alt="">
+                  <a href="/products/<%= products[index].id %> "><img src="<%=products[index].images[0].url  %> " alt=""></a>
                   <div class="addCart">
                     <form action="/cart/<%= products[index].id %> " method="get">
                       <button class="btn"><i class="fas fa-shopping-cart"></i></button>
@@ -182,6 +198,7 @@
                     <form class="mb-2" action="/search" method="get">
                       <button class="btn"><span><i class="fas fa-search"></i></span></button>
                     </form>
+                    <!-- <button class="btn search-btn"><span><i class="fas fa-search"></i></span></button> -->
                     <form class="mt-2" action="/wishlist/<%= products[index].id %> " method="get">
                       <button class="btn"><span><i class="fas fa-heart"></i></span></button>
                     </form>

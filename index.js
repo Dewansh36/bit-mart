@@ -108,6 +108,10 @@ app.use('/cart', cartRoute);
 
 app.use('/wishlist', wishlistRoute);
 
+app.use('/search',(req,res,next)=>{
+    res.render('search');
+})
+
 app.use(errorMiddleware)
 
 

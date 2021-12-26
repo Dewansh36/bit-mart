@@ -19,3 +19,6 @@ $('.slider-one').not(".slick-intialized").slick({
 //     autoplay: true,
 //     autoplaySpeed:3000
 // })
+// document.getElementsByClassName('.search-btn').onclick = function() {
+//     document.getElementById('nav_search').focus();
+// };
