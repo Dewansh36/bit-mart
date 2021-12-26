@@ -85,6 +85,7 @@ const product=require('./routes/productRoute');
 const reviewRoute=require('./routes/reviewRoutes');
 const cartRoute=require('./routes/cartRoutes');
 const wishlistRoute=require('./routes/wishlistRoutes');
+const orderRoute=require('./routes/orderRoute');
 const errorMiddleware=require('./middleware/error')
 
 //Home and Front Pages
@@ -108,9 +109,7 @@ app.use('/cart', cartRoute);
 
 app.use('/wishlist', wishlistRoute);
 
-app.use('/search',(req,res,next)=>{
-    res.render('search');
-})
+app.use('/order', orderRoute);
 
 app.use(errorMiddleware)
 

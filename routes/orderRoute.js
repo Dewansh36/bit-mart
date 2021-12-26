@@ -1,9 +1,15 @@
+const { render }=require("ejs");
 const express=require("express")
-const { newOrder, myOrders }=require("../controllers/orderController")
+const { renderOrders, newOrder, myOrders }=require("../controllers/orderController")
 
-const router=express.router()
+const router=express.Router({ mergeParams: true });
+const checkLogin=require('../middleware/checkLogin');
 
-router.route("/order/new").post(newOrder)
-router.route("/order/me").get(myOrders)
+router.route('/')
+    .get(checkLogin, renderOrders)
+    .post(checkLogin, newOrder);
+
+router.route('/my')
+    .get(checkLogin, myOrders);
 
 module.exports=router

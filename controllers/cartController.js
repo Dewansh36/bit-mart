@@ -25,13 +25,22 @@ module.exports.addProduct=async (req, res, next) => {
             cartItem: product,
             quantity: quantity
         });
-        await item.save();
-        user.cartItems.push(item);
-        product.quantity-=quantity;
+        let flag=false;
+        for (let carti of user.cartItems) {
+            if (carti.cartItem.id==item.cartItem.id) {
+                carti.quantity+=item.quantity;
+                flag=true;
+                await carti.save();
+                break;
+            }
+        }
+        if (flag==false) {
+            await item.save();
+            user.cartItems.push(item);
+        }
         // console.log(item, user, product);
         // res.send('Ok!');
         await user.save();
-        await product.save();
         req.flash('success', 'Product Successfully Added to the Cart');
         res.redirect(`/products/${id}`);
     }
@@ -44,7 +53,6 @@ module.exports.removeProduct=async (req, res, next) => {
     const item=await Cart.findById(id)
         .populate('cartItem');
     const product=await Product.findById(item.cartItem.id);
-    product.quantity+=item.quantity;
     for (let i=0; i<user.cartItems.length; i++) {
         if (user.cartItems[i].id==item.id) {
             user.cartItems.splice(i, 1);

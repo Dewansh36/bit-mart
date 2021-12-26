@@ -63,7 +63,7 @@ exports.getAllProducts=catchAsyncerror(async (req, res, next) => {
     return next(new Apperror('Product not found', 404))
   }
   // res.redirect()
-  res.render('products/product', { products,page: currentPage ,mxLength: sze});
+  res.render('products/product', { products, page: currentPage, mxLength: sze });
   // res.status(200).json({
   //   success: true,
   //   product,
@@ -160,3 +160,8 @@ exports.deleteProduct=catchAsyncerror(async (req, res, next) => {
   //   message: 'Product deleted successfully',
   // })
 })
+
+exports.getMyProducts=async (req, res, next) => {
+  const products=await Product.find({ creator: req.user });
+  res.render('products/my', { products });
+}

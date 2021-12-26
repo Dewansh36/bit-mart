@@ -17,13 +17,12 @@ const orderSchema=new mongoose.Schema({
   },
   orderItem: {
     type: mongoose.Schema.ObjectId,
-    ref: 'Product',
+    ref: 'Products',
     required: true
   },
   orderStatus: {
     type: String,
     default: "Processing",
-    required: true
   },
   deliveredAt: Date,
   createdAt: {
