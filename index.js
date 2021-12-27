@@ -111,6 +111,10 @@ app.use('/wishlist', wishlistRoute);
 
 app.use('/order', orderRoute);
 
+app.get('/aboutus', (req, res) => {
+    res.render('aboutus');
+})
+
 app.use(errorMiddleware)
 
 
