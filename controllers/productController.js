@@ -52,6 +52,7 @@ exports.getAllProducts=catchAsyncerror(async (req, res, next) => {
   const features=new Features(Product.find(), req.query)
     .search()
     .filter()
+    .type()
     .pagination(resultperpage)
   const products=await features.query
   // res.send(req.query);

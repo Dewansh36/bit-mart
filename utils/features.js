@@ -42,6 +42,16 @@ class Features {
 
     return this;
   }
+  type(){
+    let type = this.queryStr.type;
+    if(type==undefined){
+      this.query=this.query.find().limit(6)
+    }
+    else{
+      this.query=this.query.find({ $and: [{ type: type }] })
+    }
+    return this;
+  }
 }
 
 module.exports=Features
