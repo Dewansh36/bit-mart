@@ -4,6 +4,8 @@ const Apperror=require('../utils/errorClass')
 const Features=require('../utils/features')
 const catchAsyncerror=require('../middleware/catchAsyncerror')
 const multer=require('multer');
+const Review=require('../models/reviewModel');
+const cloudinary=require('cloudinary').v2;
 
 exports.renderCreate=(req, res, next) => {
   res.render('products/sell');
@@ -138,6 +140,13 @@ exports.updateProduct=catchAsyncerror(async (req, res, next) => {
 
 exports.deleteProduct=catchAsyncerror(async (req, res, next) => {
   const product=await Product.findById(req.params.id)
+    .populate('images')
+    .populate({
+      path: 'reviews',
+      populate: {
+        path: 'images'
+      }
+    });
   const user=await User.findById(req.user.id)
     .populate('products');
   if (!product) {
@@ -152,14 +161,24 @@ exports.deleteProduct=catchAsyncerror(async (req, res, next) => {
       break;
     }
   }
+  for (let review of product.reviews) {
+    const delreview=await Review.findById(review.id);
+    for (image of delreview.images) {
+      cloudinary.uploader.destroy(image.public_id, (err, result) => {
+        console.log(result);
+      });
+      await Review.findByIdAndDelete(delreview.id);
+    }
+  }
+  for (let image of product.images) {
+    cloudinary.uploader.destroy(image.public_id, (err, result) => {
+      console.log(result);
+    });
+  }
   await user.save();
   await product.remove();
   req.flash('success', 'Product Deleted Successfully!');
   res.redirect('/');
-  // res.status(200).json({
-  //   success: true,
-  //   message: 'Product deleted successfully',
-  // })
 })
 
 exports.getMyProducts=async (req, res, next) => {

@@ -113,7 +113,8 @@
             <% for( let index=0;index<products.length;index++ ) { %>
               <div class="product">
                 <div class="img-container">
-                  <img src="<%=products[index].images[0].url  %> " alt="">
+                  <a href="/products/<%= products[index].id %> "><img src="<%=products[index].images[0].url  %> "
+                      alt=""></a>
                   <div class="addCart">
                     <form action="/cart/<%= products[index].id %> " method="get">
                       <button class="btn"><i class="fas fa-shopping-cart"></i></button>
@@ -147,15 +148,15 @@
       <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
           <form action="/products" method="get">
-          <li class="page-item disabled">
-            <% if (page>1) { %>
-              <label class="b-btn mx-2" for="prev">Previous</label>
-              <input id="prev" type="submit" name="page" value="<%= page-1 %> " hidden>
-              <% } %>
-            <!-- <a class="page-link" href="#" tabindex="-1">Previous</a> --> 
-          </li>
-          
-        </form>
+            <li class="page-item disabled">
+              <% if (page>1) { %>
+                <label class="b-btn mx-2" for="prev">Previous</label>
+                <input id="prev" type="submit" name="page" value="<%= page-1 %> " hidden>
+                <% } %>
+                  <!-- <a class="page-link" href="#" tabindex="-1">Previous</a> -->
+            </li>
+
+          </form>
           <!-- <li class="page-item"><a class="page-link" href="#">1</a></li>
           <li class="page-item"><a class="page-link" href="#">2</a></li>
           <li class="page-item"><a class="page-link" href="#">3</a></li> -->
@@ -165,8 +166,8 @@
                 <label class="b-btn mx-2" for="next">Next</label>
                 <input id="next" type="submit" name="page" value="<%= page+1 %>" hidden>
                 <% } %>
-              
-              <!-- <a class="page-link" href="#" tabindex="+1">Next</a> -->
+
+                  <!-- <a class="page-link" href="#" tabindex="+1">Next</a> -->
             </li>
           </form>
         </ul>

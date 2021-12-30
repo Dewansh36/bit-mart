@@ -26,8 +26,8 @@ const reviewSchema=new mongoose.Schema({
         imageSchema
     ],
     date: {
-        type: Date,
-        default: Date.now(),
+        type: String,
+        default: new Date(Date.now()).toDateString()+" "+new Date(Date.now()).toLocaleTimeString(),
     },
     creator: {
         type: mongoose.Schema.Types.ObjectId,

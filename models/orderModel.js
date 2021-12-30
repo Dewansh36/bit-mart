@@ -26,8 +26,8 @@ const orderSchema=new mongoose.Schema({
   },
   deliveredAt: Date,
   createdAt: {
-    type: Date,
-    default: Date.now()
+    type: String,
+    default: new Date(Date.now()).toDateString()+" "+new Date(Date.now()).toLocaleTimeString()
   }
 }
 );

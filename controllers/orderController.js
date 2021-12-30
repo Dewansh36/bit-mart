@@ -47,7 +47,8 @@ exports.newOrder=catchAsyncerror(async (req, res, next) => {
    }
 
    for (let item of curUser.cartItems) {
-      let product=await Product.findById(item.cartItem.id);
+      let product=await Product.findById(item.cartItem.id)
+         .populate('creator');
       let order=new Order({
          shippingInfo: {
             HostelNumber: hostelNo,
@@ -55,6 +56,12 @@ exports.newOrder=catchAsyncerror(async (req, res, next) => {
             phoneNo: phoneNo
          }
       });
+      if (User.exists({ id: product.creator.id })==true) {
+         let seller=await User.findById(product.creator.id);
+         seller.coins+=item.quantity*product.price;
+         await seller.save();
+      }
+      curUser.coins-=item.quantity*product.price;
       order.orderItem=item.cartItem.id;
       product.quantity-=item.quantity;
       await order.save();

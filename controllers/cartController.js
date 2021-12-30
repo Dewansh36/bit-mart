@@ -78,13 +78,11 @@ module.exports.viewCart=async (req, res, next) => {
                 }
             }
         });
+
+
     // console.log(curUser.cartItems[0].cartItem.images[0]);
-    // for (let items of curUser.cartItems) {
-    //     console.log(items);
-    //     for (let pic of items.images) {
-    //         console.log(pic);
-    //     }
-    // }
+    curUser.cartItems=curUser.cartItems.filter((item) => { return item.cartItem!=null });
+    await curUser.save();
     // res.send('Ok!');
     res.render('cart/cart', { curUser });
 }

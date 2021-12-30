@@ -6,7 +6,7 @@
 
     <title>Shopping Cart</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
-    integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+        integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
     <link href="/css/cart.css" rel="stylesheet">
     <!-- FONT -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -36,10 +36,10 @@
                                     <br>
                                     <div class="product-remove">
                                         <a class="mr-3" href="/products/<%=curUser.wishList[index].id%> "><button
-                                                class="btn"><i class="fas fa-eye"></i>View</button></a>
+                                                class="b-btn"><i class="fas fa-eye"></i>View</button></a>
                                         <form class="d-inline" method="post"
                                             action="/wishlist/<%= curUser.wishList[index].id %>?_method=DELETE">
-                                            <button class="btn submit"><i class="fa fa-trash"
+                                            <button class="b-btn submit"><i class="fa fa-trash"
                                                     aria-hidden="true"></i>Remove</button>
                                         </form>
                                     </div>
@@ -49,12 +49,13 @@
                     </div>
                 </div>
             </div>
-            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-      <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
+            <script type="text/javascript"
+                src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+            <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
-        crossorigin="anonymous"></script>
-        <script src="/js/sell.js"></script>
+                integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+                crossorigin="anonymous"></script>
+            <script src="/js/sell.js"></script>
             <%- include('../partials/footer') %>
 </body>
 
