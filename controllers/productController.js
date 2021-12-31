@@ -23,18 +23,34 @@ exports.createProduct=catchAsyncerror(async (req, res, next) => {
     const product=new Product(req.body);
     product.creator=req.user.id;
     const user=await User.findById(req.user.id);
+    let flag=false;
     for (let file of req.files) {
       let obj={
         url: file.path,
         public_id: file.filename
       }
-      product.images.push(obj);
+      const imageDetail=await cloudinary.api.resource(obj.public_id);
+      if(imageDetail.width>=imageDetail.height)
+      {
+        await cloudinary.uploader.destroy(obj.public_id);
+        flag=true;
+      }
+      else
+      {
+        product.images.push(obj);
+      }
+    }
+    if(flag)
+    {
+      req.flash('error','All Images must be of Potrait Orientation');
+      res.redirect('/products/new');
+      return;
     }
     await product.populate('creator');
     user.products.push(product);
     await product.save();
     await user.save();
-    // console.log(user, product);
+    console.log(user, product);
     req.flash('success', 'Product Created!');
     res.redirect(`/products/${product.id}`);
     // res.status(201).json({
@@ -82,10 +98,14 @@ exports.getProductDetails=catchAsyncerror(async (req, res, next) => {
       }
     })
     .populate('creator');
+  
   if (!product) {
     return next(new Apperror('Product not found', 404))
   }
-  res.render('products/view', { product });
+
+  let rno=(Number)(req.query.rno||2);
+
+  res.render('products/view', { product,end: rno});
   // res.status(200).json({
   //   success: true,
   //   product,
@@ -106,12 +126,28 @@ exports.updateProduct=catchAsyncerror(async (req, res, next) => {
     if (!product) {
       return next(new Apperror('Product not found', 404))
     }
+    let flag=false;
     for (let file of req.files) {
       let obj={
         url: file.path,
         public_id: file.filename
       }
-      product.images.push(obj);
+      const imageDetail=await cloudinary.api.resource(obj.public_id);
+      if(imageDetail.width>=imageDetail.height)
+      {
+        await cloudinary.uploader.destroy(obj.public_id);
+        flag=true;
+      }
+      else
+      {
+        product.images.push(obj);
+      }
+    }
+    if(flag)
+    {
+      req.flash('error','All Images must be of Potrait Orientation');
+      res.redirect(`/products/${product.id}/edit`);
+      return;
     }
     if (req.body.deleteImages) {
       for (let img of req.body.deleteImages) {

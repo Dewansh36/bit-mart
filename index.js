@@ -111,6 +111,11 @@ app.use('/wishlist', wishlistRoute);
 
 app.use('/order', orderRoute);
 
+app.get('/search',(req,res,next)=>{
+    res.render('search');
+});
+
+
 app.get('/aboutus', (req, res) => {
     res.render('aboutus');
 })

@@ -52,14 +52,9 @@ module.exports.viewWishList=async (req, res, next) => {
                 path: 'images'
             }
         });
-    // console.log(curUser.cartItems[0].cartItem.images[0]);
-    // for (let items of curUser.cartItems) {
-    //     console.log(items);
-    //     for (let pic of items.images) {
-    //         console.log(pic);
-    //     }
-    // }
-    // res.send('Ok!');
-    res.render('cart/wishlist', { curUser });
+        let total=(Number)(req.query.total||4);
+        curUser.wishList=curUser.wishList.filter((item) => { return item!=null });
+        await curUser.save();
+    res.render('cart/wishlist', { curUser,total: total });
 }
 

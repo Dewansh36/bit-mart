@@ -20,55 +20,67 @@
 <body>
     <%- include('../partials/flash') %>
         <%- include('../partials/navbar') %>
-            <div class="container" style="min-height: 100vh;">
-                <h1 style="color: #45ccb8;"> Shopping Cart</h1>
-                <div class="cart">
-                    <div class="products">
-                        <% for( let index=0;index<curUser.cartItems.length;index++ ) { %>
-                            <div class="product" id="<%= index+1 %> ">
-                                <img src="<%= curUser.cartItems[index].cartItem.images[0].url %> ">
-                                <div class="product-info">
-                                    <h3 class="product-name">
-                                        <%= curUser.cartItems[index].cartItem.name %>
-                                    </h3>
-                                    <h4 class="product-price">
-                                        <%= curUser.cartItems[index].cartItem.price %>
-                                    </h4>
-                                    <p class="product-quantity">Qnt : <span class="qval">
-                                            <%= curUser.cartItems[index].quantity %>
-                                        </span>
-                                    </p>
-                                    <br>
-                                    <div class="product-remove">
-                                        <form method="post"
-                                            action="/cart/<%= curUser.cartItems[index].id %>?_method=DELETE">
-                                            <button class="b-btn submit"><i class="fa fa-trash"
-                                                    aria-hidden="true"></i>Remove</button>
-                                        </form>
-                                    </div>
+        <div class="container" style="min-height: 100vh;">
+            <h1 style="color: #45ccb8;"> Shopping Cart</h1>
+            <div class="cart">
+                <div class="products">
+                    <% for( let index=0;index<Math.min(total,curUser.cartItems.length);index++ ) { %>
+                        <div class="product" id="<%= index+1 %> ">
+                            <img src="<%= curUser.cartItems[index].cartItem.images[0].url %> ">
+                            <div class="product-info">
+                                <h3 class="product-name">
+                                    <%= curUser.cartItems[index].cartItem.name %>
+                                </h3>
+                                <h4 class="product-price">
+                                    <%= curUser.cartItems[index].cartItem.price %>
+                                </h4>
+                                <p class="product-quantity">Qnt : <span class="qval">
+                                        <%= curUser.cartItems[index].quantity %>
+                                    </span>
+                                </p>
+                                <br>
+                                <div class="product-remove">
+                                    <form method="post"
+                                        action="/cart/<%= curUser.cartItems[index].id %>?_method=DELETE">
+                                        <button class="b-btn submit"><i class="fa fa-trash"
+                                                aria-hidden="true"></i>Remove</button>
+                                    </form>
                                 </div>
                             </div>
-                            <% } %>
-                    </div>
-                    <div class="cart-total">
-                        <p>
-                            <span>Number of Items</span>
-                            <span id="tot-item"></span>
-                        </p>
-                        <p>
-                            <span>Taxes</span>
-                            <span id="tot-tax"> </span>
-                        </p>
-                        <p>
-                            <span>Total Price</span>
-                            <span id="tot-price"></span>
-                        </p>
+                        </div>
+                        <% } %>
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-center">
+                              <form action="/cart" method="get">
+                                <li class="page-item disabled">
+                                  <% if (total<curUser.cartItems.length) { %>
+                                    <label class="b-btn mx-2" for="prev">View More</label>
+                                    <input id="prev" type="submit" name="total" value="<%= total+2%> " hidden>
+                                    <% } %>
+                                      <!-- <a class="page-link" href="#" tabindex="-1">Previous</a> -->
+                                </li>
+                            </ul>
+                          </nav>
+                </div>
+                <div class="cart-total">
+                    <p>
+                        <span>Number of Items</span>
+                        <span id="tot-item"></span>
+                    </p>
+                    <p>
+                        <span>Taxes</span>
+                        <span id="tot-tax"> </span>
+                    </p>
+                    <p>
+                        <span>Total Price</span>
+                        <span id="tot-price"></span>
+                    </p>
 
 
-                        <a href="/order">Proceed to Checkout</a>
-                    </div>
+                    <a href="/order">Proceed to Checkout</a>
                 </div>
             </div>
+        </div>
             <script type="text/javascript"
                 src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
             <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>

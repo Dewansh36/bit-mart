@@ -2,6 +2,7 @@ const express=require('express');
 const User=require('../models/user');
 const Cart=require('../models/cartModel');
 const Product=require('../models/productModel');
+const Features=require('../utils/features');
 
 module.exports.addProduct=async (req, res, next) => {
     let { id }=req.params;
@@ -10,7 +11,12 @@ module.exports.addProduct=async (req, res, next) => {
         quantity=1;
     }
     const user=await User.findById(req.user.id)
-        .populate('cartItems');
+        .populate({
+            path: 'cartItems',
+            populate:{
+                path:'cartItem'
+            }
+        });
     const product=await Product.findById(id);
     if (quantity<1) {
         req.flash('error', 'Please Select Product Quantity');
@@ -27,8 +33,14 @@ module.exports.addProduct=async (req, res, next) => {
         });
         let flag=false;
         for (let carti of user.cartItems) {
-            if (carti.cartItem.id==item.cartItem.id) {
+            if (carti.cartItem.id==product.id) {
                 carti.quantity+=item.quantity;
+                if(carti.quantity>product.quantity)
+                {
+                    req.flash('error','Not Enough Products In Stock');
+                    res.redirect(`/products/${product.id}`);
+                    return;
+                }
                 flag=true;
                 await carti.save();
                 break;
@@ -79,11 +91,11 @@ module.exports.viewCart=async (req, res, next) => {
             }
         });
 
-
+    let total=(Number)(req.query.total||4);
     // console.log(curUser.cartItems[0].cartItem.images[0]);
     curUser.cartItems=curUser.cartItems.filter((item) => { return item.cartItem!=null });
     await curUser.save();
     // res.send('Ok!');
-    res.render('cart/cart', { curUser });
+    res.render('cart/cart', { curUser,total: total });
 }
 
