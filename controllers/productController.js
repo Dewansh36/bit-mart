@@ -219,5 +219,6 @@ exports.deleteProduct=catchAsyncerror(async (req, res, next) => {
 
 exports.getMyProducts=async (req, res, next) => {
   const products=await Product.find({ creator: req.user });
-  res.render('products/my', { products });
+  let orders=(Number)(req.query.orders||3);
+  res.render('products/my', { products,orders:orders });
 }

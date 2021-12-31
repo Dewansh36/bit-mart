@@ -24,7 +24,7 @@
                 <h1 style="color: #45ccb8;"> Order List</h1>
                 <div class="cart">
                     <div class="products d-flex flex-column">
-                        <% for( let index=0;index<curUser.orders.length;index++ ) { %>
+                        <% for( let index=0;index<Math.min(curUser.orders.length,orders);index++ ) { %>
                             <div class="product" id="<%= index+1 %> ">
                                 <img src="<%= curUser.orders[index].orderItem.images[0].url %> ">
                                 <div class="product-info">
@@ -61,6 +61,18 @@
                             </div>
                     </div>
                     <% } %>
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-center">
+                          <form action="/order/my" method="get">
+                            <li class="page-item disabled">
+                              <% if (orders<curUser.orders.length) { %>
+                                <label class="b-btn mx-2" for="prev">View More</label>
+                                <input id="prev" type="submit" name="orders" value="<%= orders+2%> " hidden>
+                                <% } %>
+                                  <!-- <a class="page-link" href="#" tabindex="-1">Previous</a> -->
+                            </li>
+                        </ul>
+                      </nav>
                 </div>
             </div>
             </div>

@@ -95,7 +95,12 @@ module.exports.viewCart=async (req, res, next) => {
     // console.log(curUser.cartItems[0].cartItem.images[0]);
     curUser.cartItems=curUser.cartItems.filter((item) => { return item.cartItem!=null });
     await curUser.save();
+    let totalPrice=0;
+    for(item of curUser.cartItems)
+    {
+        totalPrice+=(item.cartItem.price*item.quantity);
+    }
     // res.send('Ok!');
-    res.render('cart/cart', { curUser,total: total });
+    res.render('cart/cart', { curUser,total: total,totalPrice: totalPrice });
 }
 
