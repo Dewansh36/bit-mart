@@ -1,6 +1,6 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900");
 body {
   background: #1f2029;
-  font-family: 'Josefin Sans', sans-serif;
   font-size: 16px;
   font-size: 1rem;
   font-weight: 600;
@@ -26,7 +26,7 @@ p {
   line-height: 1.9;
 }
 
-label {
+.form-label {
   font-size: 16px;
   font-size: 1rem;
   font-weight: 600;
@@ -287,7 +287,7 @@ input[type="file"]:focus {
 .form-check-input:checked[type=radio]:active {
   background-color: #1f2029;
   border: none !important;
-  -webkit-outline: 0px !important;
+  /* -webkit-outline: 0px !important; */
   box-shadow: none !important;
   color: #ffeba7;
 }
