@@ -194,9 +194,9 @@
                                                     <img src="<%= product.reviews[index].images[0].url %> " class="d-block"
                                                         alt="...">
                                                 </div>
-                                                <% for( let index=1; index < product.reviews[index].images.length; index++ ) { %>
+                                                <% for( let rindex=1; rindex < product.reviews[index].images.length; rindex++ ) { %>
                                                     <div class="carousel-item">
-                                                        <img src="<%= product.reviews[index].images[index].url %>" class="d-block"
+                                                        <img src="<%= product.reviews[rindex].images[rindex].url %>" class="d-block"
                                                             alt="...">
                                                     </div>
                                                     <% } %>

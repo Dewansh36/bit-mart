@@ -101,6 +101,7 @@ exports.getProductDetails=catchAsyncerror(async (req, res, next) => {
   }
 
   let rno=(Number)(req.query.rno||2);
+  console.log(product.reviews);
 
   res.render('products/view', { product, end: rno });
   // res.status(200).json({
