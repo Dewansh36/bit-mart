@@ -1,6 +1,7 @@
 const express=require('express');
 const app=express();
 const mongoose=require('mongoose');
+const Mongostore=require('connect-mongo');
 const ejsmate=require('ejs-mate');
 const session=require('express-session');
 const flash=require('connect-flash');
@@ -21,7 +22,7 @@ const dotenv=require('dotenv');
 dotenv.config({})
 
 async function main() {
-    mongoose.connect('mongodb://localhost:27017/BitMart');
+    mongoose.connect(process.env.db_url);
 }
 
 main()
@@ -31,6 +32,19 @@ main()
     .catch((error) => {
         console.log(error);
     });
+
+//Setting Up Mongo Store
+const store=new Mongostore(
+    {
+        mongoUrl: process.env.db_url,
+        secret: process.env.db_secret,
+        touchAfter: 24*3600
+    }
+);
+
+store.on('error', function (e) {
+    console.log(e);
+});
 
 app.listen(3000, () => {
     console.log('Listning on Port 3000');
@@ -111,7 +125,7 @@ app.use('/wishlist', wishlistRoute);
 
 app.use('/order', orderRoute);
 
-app.get('/search',(req,res,next)=>{
+app.get('/search', (req, res, next) => {
     res.render('search');
 });
 
