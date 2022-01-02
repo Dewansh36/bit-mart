@@ -13,7 +13,7 @@ a {
 }
 a:hover {
   text-decoration: none;
-  color: #c4c3ca;
+  color: var(--primary-color);
 }
 .padding {
   padding: 3rem !important;

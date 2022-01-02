@@ -36,7 +36,7 @@ const userSchema=new mongoose.Schema(
         }],
         coins: {
             type: Number,
-            default: 2000
+            default: 5000
         },
         resetPasswordToken: String,
         resetPasswordExpires: Date

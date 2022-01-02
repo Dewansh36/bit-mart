@@ -474,3 +474,10 @@ label.form-check-label.radio-lb {
     width: 90%;
   }
 }
+.content{
+  flex: 90%;
+}
+.tag{
+  border-radius: 2rem;
+  cursor: none;
+}

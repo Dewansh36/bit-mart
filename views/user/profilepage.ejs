@@ -37,14 +37,6 @@
                                         </h6>
                                         <p>Student</p> <i
                                             class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
-                                        <% if (user!=undefined && user.id==curUser.id) { %>
-                                            <div>
-                                                <a href="/order/my "><button class="b-btn mt-4">Orders</button></a>
-                                            </div>
-                                            <div>
-                                                <a href="/products/my "><button class="b-btn mt-4">Products</button></a>
-                                            </div>
-                                            <% } %>
                                     </div>
                                 </div>
                                 <div class="col-sm-8">
@@ -58,32 +50,50 @@
                                                 </h6>
                                             </div>
                                             <div class="col-sm-6">
-                                                <p class="m-b-10 f-w-60"></p>
+                                                <p class="m-b-10 f-w-600">Roll No</p>
+                                                <h6 class="text-muted f-w-400">
+                                                    <%= curUser.roll %>
+                                                </h6>
                                             </div>
                                         </div>
                                         <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">Details</h6>
                                         <div class="row">
-                                            <div class="col-sm-6">
-                                                <a href="#" class="m-b-10 f-w-600">Products</a>
-                                                <h6 class="text-muted f-w-400">
+                                            <% if (user!=undefined && user.id==curUser.id) { %>
+                                                <div class="col-sm-6">
+                                                    <a href="/products/my" class="m-b-10 f-w-600">Products</a>
+                                                    <h6 class="text-muted f-w-400">
                                                     <%= curUser.products.length %>
-                                                </h6>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <a href="#" class="m-b-10 f-w-600">Order</a>
-                                                <h6 class="text-muted f-w-400">
-                                                    <%= curUser.orders.length %>
-                                                </h6>
-                                            </div>
+                                                    </h6>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <a href="/order/my" class="m-b-10 f-w-600">Order</a>
+                                                    <h6 class="text-muted f-w-400">
+                                                        <%= curUser.orders.length %>
+                                                    </h6>
+                                                </div>
+                                             <% } else { %>
+                                                <div class="col-sm-6">
+                                                    <a href="#" class="m-b-10 f-w-600">Products</a>
+                                                    <h6 class="text-muted f-w-400">
+                                                    <%= curUser.products.length %>
+                                                    </h6>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <a href="#" class="m-b-10 f-w-600">Order</a>
+                                                    <h6 class="text-muted f-w-400">
+                                                        <%= curUser.orders.length %>
+                                                    </h6>
+                                                </div>
+                                            <% } %>
                                         </div>
                                         <br>
-                                        <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Bucks</h6>
+                                        <h6 class="m-b-20 p-b-5 b-b-default f-w-600"> <p class="m-b-10 f-w-600"><i class="fab fa-bitcoin"></i>Bitmart-Coins</p></h6>
                                         <div class="row">
                                             <div class="col-sm-6">
-                                                <p class="m-b-10 f-w-600">Currency</p>
+                                               
                                                 <% if (user!=undefined && user.id==curUser.id) { %>
                                                     <h6 class="text-muted f-w-400">
-                                                        <%= curUser.coins %>
+                                                        <i class="fab fa-bitcoin"></i><%= curUser.coins %>
                                                     </h6>
                                                     <% } else { %>
                                                         <h6 class="text-muted f-w-400">******</h6>

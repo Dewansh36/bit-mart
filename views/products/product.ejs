@@ -131,15 +131,19 @@
                     <!-- <span><i class="fas fa-sliders-h"></i></span> -->
                   </ul>
                 </div>
-                <div class="bottom">
-                  <a href="/products/<%= products[index].id %> ">
-                    <%= products[index].name %>
-                  </a>
+                <div class="bottom d-flex">
+                  <div class="content">
+                    <a href="/products/<%= products[index].id %> ">
+                      <%= products[index].name %>
+                    </a>
+                  <!-- <button type="button" class="btn btn-outline-danger">Sell</button> -->
                   <div class="price">
-                    <span>
-                      <%= products[index].price %>
-                    </span>
+                    <span><i class="fab fa-bitcoin"></i>2000</span>
                   </div>
+                </div>
+                <div class="content-r">
+                  <button type="button" class="tag btn btn-outline-danger"><%= products[index].type.charAt(0).toUpperCase() + products[index].type.slice(1)%> </button>
+                </div>
                 </div>
               </div>
               <% } %>
