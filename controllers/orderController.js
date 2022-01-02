@@ -18,8 +18,8 @@ exports.renderOrders=async (req, res, next) => {
       totalPrice+=item.cartItem.price;
    }
    totalPrice+=(totalPrice*0.05);
-   if(totalPrice<=0){
-      req.flash("error","Your cart is empty!");
+   if (totalPrice<=0) {
+      req.flash("error", "Your cart is empty!");
       res.redirect('/cart')
       return;
    }
@@ -68,6 +68,7 @@ exports.newOrder=catchAsyncerror(async (req, res, next) => {
       }
       curUser.coins-=item.quantity*product.price;
       order.orderItem=item.cartItem.id;
+      order.createdAt=new Date(Date.now()).toDateString()+" "+new Date(Date.now()).toLocaleTimeString();
       product.quantity-=item.quantity;
       await order.save();
       await product.save();
@@ -93,7 +94,7 @@ exports.myOrders=catchAsyncerror(async (req, res, next) => {
       });
    // console.log(curUser.orders);
    let orders=Number(req.query.orders||3);
-   res.render('cart/orders', { curUser,orders:orders});
+   res.render('cart/orders', { curUser, orders: orders });
 
    // res.status(200).json({
    //    success: true,

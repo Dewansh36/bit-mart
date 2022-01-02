@@ -30,19 +30,16 @@ exports.createProduct=catchAsyncerror(async (req, res, next) => {
         public_id: file.filename
       }
       const imageDetail=await cloudinary.api.resource(obj.public_id);
-      if(imageDetail.width>=imageDetail.height)
-      {
+      if (imageDetail.width>=imageDetail.height) {
         await cloudinary.uploader.destroy(obj.public_id);
         flag=true;
       }
-      else
-      {
+      else {
         product.images.push(obj);
       }
     }
-    if(flag)
-    {
-      req.flash('error','All Images must be of Potrait Orientation');
+    if (flag) {
+      req.flash('error', 'All Images must be of Potrait Orientation');
       res.redirect('/products/new');
       return;
     }
@@ -98,14 +95,14 @@ exports.getProductDetails=catchAsyncerror(async (req, res, next) => {
       }
     })
     .populate('creator');
-  
+
   if (!product) {
     return next(new Apperror('Product not found', 404))
   }
 
   let rno=(Number)(req.query.rno||2);
 
-  res.render('products/view', { product,end: rno});
+  res.render('products/view', { product, end: rno });
   // res.status(200).json({
   //   success: true,
   //   product,
@@ -133,19 +130,16 @@ exports.updateProduct=catchAsyncerror(async (req, res, next) => {
         public_id: file.filename
       }
       const imageDetail=await cloudinary.api.resource(obj.public_id);
-      if(imageDetail.width>=imageDetail.height)
-      {
+      if (imageDetail.width>=imageDetail.height) {
         await cloudinary.uploader.destroy(obj.public_id);
         flag=true;
       }
-      else
-      {
+      else {
         product.images.push(obj);
       }
     }
-    if(flag)
-    {
-      req.flash('error','All Images must be of Potrait Orientation');
+    if (flag) {
+      req.flash('error', 'All Images must be of Potrait Orientation');
       res.redirect(`/products/${product.id}/edit`);
       return;
     }
@@ -220,5 +214,5 @@ exports.deleteProduct=catchAsyncerror(async (req, res, next) => {
 exports.getMyProducts=async (req, res, next) => {
   const products=await Product.find({ creator: req.user });
   let orders=(Number)(req.query.orders||3);
-  res.render('products/my', { products,orders:orders });
+  res.render('products/my', { products, orders: orders });
 }
