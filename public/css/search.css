@@ -5,6 +5,7 @@ a {
   color: inherit;
 }
 body {
+  font-family: "Poppins", sans-serif;
   background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat.svg");
   background-color: #2a2b38;
 }
@@ -67,7 +68,7 @@ body {
   .searchBox > input[type="text"] {
     font-size: 1.3rem;
   }
-  .searchBox{
+  .searchBox {
     top: 0;
   }
 }

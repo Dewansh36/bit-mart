@@ -29,7 +29,7 @@
                             <div class="img-display">
                                 <div class="img-showcase">
                                     <% for( let image of product.images ) { %>
-                                        <img src="<%= image.url %> " alt="shoe image">
+                                        <img src="<%= image.url %> " alt="shoe image" class="">
                                         <% } %>
                                 </div>
                             </div>
@@ -38,7 +38,7 @@
                                     <div class="img-item">
                                         <a href="#" data-id="<%= index+1 %> ">
                                             <img src="<%= product.images[index].url %> " alt="shoe image"
-                                                class="img-thumbnail">
+                                                class="img-thumbnail ">
                                         </a>
                                     </div>
                                     <% } %>
@@ -46,7 +46,7 @@
                         </div>
                     </div>
                     <div class="col-md-5 col-sm-12">
-                        <h2>
+                        <h2 style="color: #45ccb8;">
                             <%= product.name %>
                         </h2>
                         <% if (user!=undefined && product.creator.id==user.id) { %>
@@ -116,9 +116,9 @@
                                     <% } %>
 
                                         <% if (product.type=="rent" ) { %>
-                                            <div style="font-size: medium;">
+                                            <h4 style="color: #f64749;">
                                                 Note: &nbsp;&nbsp; The Rental Period is 1 month
-                                            </div>
+                                            </h4>
                                             <% } %>
                                                 <% if (product.quantity==0) { %>
                                                     <img src="https://www.pngplay.com/wp-content/uploads/6/Sold-Out-Red-Icon-Transparent-PNG.png"

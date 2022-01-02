@@ -5,6 +5,7 @@ a {
   color: inherit;
 }
 body {
+  font-family: "Poppins", sans-serif;
   /* background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat.svg"); */
   background-color: #2a2b38;
 }
@@ -45,8 +46,11 @@ body {
   overflow: hidden;
 }
 .product .img-container {
+  display: flex;
+  justify-content: center;
   position: relative;
   cursor: pointer;
+
   /* height: 500px; */
 }
 .product .img-container img {
@@ -474,10 +478,10 @@ label.form-check-label.radio-lb {
     width: 90%;
   }
 }
-.content{
+.content {
   flex: 90%;
 }
-.tag{
+.tag {
   border-radius: 2rem;
   cursor: none;
 }

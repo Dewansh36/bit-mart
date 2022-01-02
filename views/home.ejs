@@ -185,7 +185,7 @@
           <div class="product-layout">
             <% for( let index=0; index < Math.min(products.length,8); index++ ) { %>
               <div class="product">
-                <div class="img-container">
+                <div class="img-container ">
                   <a href="/products/<%= products[index].id %> "><img src="<%=products[index].images[0].url  %> "
                       alt=""></a>
                   <div class="addCart">
@@ -211,7 +211,7 @@
                     </a>
                   <!-- <button type="button" class="btn btn-outline-danger">Sell</button> -->
                   <div class="price">
-                    <span><i class="fab fa-bitcoin"></i>2000</span>
+                    <span><i class="fab fa-bitcoin"></i><%= products[index].price %></span>
                   </div>
                 </div>
                 <div class="content-r">

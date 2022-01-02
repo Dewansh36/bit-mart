@@ -5,6 +5,7 @@ a {
   color: inherit;
 }
 body {
+  font-family: "Poppins", sans-serif;
   background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat.svg");
   background-color: #2a2b38;
 }
@@ -124,7 +125,7 @@ body {
 }
 .category-layout {
   display: grid;
-  grid-template-columns: repeat(3,1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 3rem;
   margin: 0 6rem;
 }
@@ -188,30 +189,30 @@ body {
 .category-item:hover::after {
   visibility: visible;
   opacity: 1;
-} 
+}
 @media only screen and (max-width: 1200px) {
   .category-content h3 {
     font-size: 1rem;
   }
 }
 @media only screen and (max-width: 996px) {
-    .category-layout{
-      grid-template-columns: repeat(2,1fr);
-      margin: 0 1rem;
-      gap: 1.5rem;
-    }
+  .category-layout {
+    grid-template-columns: repeat(2, 1fr);
+    margin: 0 1rem;
+    gap: 1.5rem;
+  }
 }
 @media only screen and (max-width: 567px) {
-    .category-layout{
-      grid-template-columns: repeat(1,1fr);
-      margin: 0 1rem;
-      gap: 1rem;
-    }
+  .category-layout {
+    grid-template-columns: repeat(1, 1fr);
+    margin: 0 1rem;
+    gap: 1rem;
+  }
 }
 /* Products */
- .section .product-layout {
+.section .product-layout {
   display: grid;
-  grid-template-columns: repeat(4,1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 3rem;
   max-width: 130rem;
   margin: 0 auto;
@@ -297,16 +298,16 @@ body {
   transform: translate(0%, -50%);
 }
 @media only screen and (max-width: 996px) {
- .section .product-layout {
+  .section .product-layout {
     /* display: grid; */
-    grid-template-columns: repeat(2,1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
   }
 }
 @media only screen and (max-width: 567px) {
- .section .product-layout {
+  .section .product-layout {
     /* display: grid; */
-    grid-template-columns: repeat(1,1fr);
+    grid-template-columns: repeat(1, 1fr);
     gap: 1rem;
   }
 }
@@ -349,10 +350,10 @@ body {
   color: #ffeba7;
   box-shadow: 0 8px 24px 0 rgba(16, 39, 112, 0.2);
 }
-.content{
+.content {
   flex: 90%;
 }
-.tag{
+.tag {
   border-radius: 2rem;
   cursor: none;
 }
