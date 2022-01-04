@@ -41,11 +41,12 @@
                 </div>
               </div>
               <div class="slider">
-                <div class="progress"></div>
+                
+                <div class="progress" style="left: <%= left %> ; right: <%= right %> ;"></div>
               </div>
               <div class="range-input">
-                <input name="gte" type="range" class="range-min" min="0" max="10000" value="0" step="100" />
-                <input name="lte" type="range" class="range-max" min="0" max="10000" value="10000" step="100" />
+                <input name="gte" type="range" class="range-min" min="0" max="10000" value="<%= query.gte %>" step="100" />
+                <input name="lte" type="range" class="range-max" min="0" max="10000" value="<%= query.lte %>" step="100" />
                 <input hidden name="type" value="<%= query.type%>" />
                 <input hidden name="page" value="1" />
                 <input hidden name="keyword" value="<%= query.keyword %>" />
@@ -66,7 +67,6 @@
                 <input hidden name="gte" value="<%= query.gte %>" />
               <ul class="categoryBox">
                 <div class="row">
-                  <div class="col-lg-12">
                     <div class="form-check ps-0 q-box my-3">
                       <div class="q-box__question">
                         <input class="form-check-input question__input q-checkbox" id="q_4_sell" name="type"
@@ -81,7 +81,6 @@
                         <label class="form-check-label question__label" for="q_4_rent">Rent</label>
                       </div>
                     </div>
-                  </div>
                 </div>
                 <div class="d-flex justify-content-center align-items-center mt-4">
                   <button class="b-btn" type="submit">Apply</button>
@@ -154,7 +153,7 @@
         </div>
         <div class="pd-layout">
           <div class="product-layout">
-            <% for( let index=0;index<products.length;index++ ) { %>
+            <% for( let index=(page-1)*6;index<Math.min(page*6,products.length);index++ ) { %>
               <div class="product">
                 <div class="img-container">
                   <a href="/products/<%= products[index].id %> "><img src="<%=products[index].images[0].url  %> "
@@ -191,46 +190,47 @@
               </div>
               <% } %>
           </div>
+          <nav aria-label="Page navigation example" class="my-5">
+            <ul class="pagination justify-content-center">
+              <form action="" class="form-products" method="get">
+                <li class="page-item disabled">
+                  <% if (page>1) { %>
+                    <label class="b-btn mx-2" for="prev">Previous</label>
+                    <input hidden name="type" value="<%= query.type%>" />
+                    <input id="prev" hidden type="submit" name="page" value="<%= page-1 %>" />
+                    <input hidden name="keyword" value="<%= query.keyword%>" />
+                    <input hidden name="gte" value="<%= query.gte%>" />" 
+                    <input hidden name="lte" value="<%= query.lte%>" />
+                    <input hidden name="category" value="<%= query.category %>"/>
+                    
+                    <% } %>
+                      <!-- <a class="page-link" href="#" tabindex="-1">Previous</a> -->
+                </li>
+    
+              </form>
+              <!-- <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li> -->
+              <form action="/products" method="get" class="form-products">
+                <li class="page-item">
+                  <% if (page<mxLength/6) { %>
+                    <label class="b-btn mx-2" for="next">Next</label>
+                    <input hidden name="type" value="<%= query.type%>" />
+                    <input id="next" hidden type="submit" name="page" value="<%= page+1 %>" />
+                    <input hidden name="keyword" value="<%= query.keyword%>" />
+                    <input hidden name="gte" value="<%= query.gte%>" />" 
+                    <input hidden name="lte" value="<%= query.lte%>" />
+                    <input hidden name="category" value="<%= query.category %>"/>
+                    <% } %>
+    
+                      <!-- <a class="page-link" href="#" tabindex="+1">Next</a> -->
+                </li>
+              </form>
+            </ul>
+          </nav>
         </div>
       </div>
-      <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-          <form action="" class="form-products" method="get">
-            <li class="page-item disabled">
-              <% if (page>1) { %>
-                <label class="b-btn mx-2" for="prev">Previous</label>
-                <input hidden name="category" value="<%= query.category %>"/>
-                <input hidden name="type" value="<%= query.type%>" />
-                <input hidden name="keyword" value="<%= query.keyword%>" />
-                <input hidden name="gte" value="<%= query.gte%>" />" 
-                <input hidden name="lte" value="<%= query.lte%>" />
-                <input id="prev" hidden type="submit" name="page" value="<%= page-1 %>" />
-                <% } %>
-                  <!-- <a class="page-link" href="#" tabindex="-1">Previous</a> -->
-            </li>
-
-          </form>
-          <!-- <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li> -->
-          <form action="/products" method="get" class="form-products">
-            <li class="page-item">
-              <% if (page<mxLength/6) { %>
-                <label class="b-btn mx-2" for="next">Next</label>
-                <input name="category" hidden  value="<%= query.category %>"/>
-                <input name="type" hidden value="<%= query.type%>" />
-                <input name="keyword" hidden value="<%= query.keyword%>" />
-                <input name="gte" hidden value="<%= query.gte%>" />
-                <input name="lte" hidden value="<%= query.lte%>" />
-                <input id="next" hidden type="submit" name="page" value="<%= page+1 %>" />
-                
-                <% } %>
-
-                  <!-- <a class="page-link" href="#" tabindex="+1">Next</a> -->
-            </li>
-          </form>
-        </ul>
-      </nav>
+      
     </main>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>

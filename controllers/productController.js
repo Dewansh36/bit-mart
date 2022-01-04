@@ -63,15 +63,16 @@ exports.createProduct=catchAsyncerror(async (req, res, next) => {
 
 exports.getAllProducts=catchAsyncerror(async (req, res, next) => {
   let resultperpage=6;
+  console.log(req.query);
   let features=new Features(Product.find(), req.query)
     .filter();
   let products=await features.query;
   let sze=products.length;
-  features=new Features(Product.find(), req.query).filter().pagination(resultperpage)
-  products=await features.query;
   // res.send(req.query);
   // const product=await partialSearch(req.query.keyword);
   let currentPage=Number(req.query.page||1);
+  // console.log(currentPage);
+  // console.log(products);
   // console.log(sze)
   if (!products) {
     return next(new Apperror('Product not found', 404))
@@ -80,7 +81,10 @@ exports.getAllProducts=catchAsyncerror(async (req, res, next) => {
   // console.log(req.query);
   req.query.gte=Number(req.query.gte||0);
   req.query.lte=Number(req.query.lte||10000);
-  res.render('products/product', { products, page: currentPage, mxLength: sze });
+  let left=((req.query.gte/10000)*100)+"%";
+  let right=100-(req.query.lte/10000)*100+"%";
+  console.log(left, right);
+  res.render('products/product', { products, page: currentPage, mxLength: sze, left: left, right: right });
   // res.status(200).json({
   //   success: true,
   //   product,
