@@ -45,6 +45,10 @@ module.exports.register=async (req, res, next) => {
             }
         });
         req.flash('success', 'Successfully Registered!');
+        if (req.session.returnTo) {
+            res.redirect(req.session.returnTo);
+            return;
+        }
         const curUser=regUser;
         // console.log(curUser);
         // res.send(curUser);
@@ -61,6 +65,10 @@ module.exports.register=async (req, res, next) => {
 module.exports.login=(req, res, next) => {
 
     const curUser=req.user;
+    if (req.session.returnTo) {
+        res.redirect(req.session.returnTo);
+        return;
+    }
     req.flash('success', 'Welcome Back!');
     // console.log(curUser);
     res.redirect('/');
