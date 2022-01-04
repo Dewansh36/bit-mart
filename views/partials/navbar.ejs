@@ -33,7 +33,6 @@
                     <a class="nav-link">
                         <form id="form1" action="/products" method="get">
                             <input hidden name="page" value="1" />
-                            <input hidden name="category" value="<%= query.category %>" />
                             <input hidden name="lte" value="<%= 10000 %>" />
                             <input hidden name="gte" value="<%= 0 %>" />
                             <input class="" id="q_buy" name="type" type="submit" value="sell" hidden>
@@ -43,7 +42,6 @@
                 <li class="nav-item">
                     <form id="form2" action="/products" method="get">
                         <input hidden name="page" value="1" />
-                        <input hidden name="category" value="<%= query.category %>" />
                         <input hidden name="lte" value="<%= 10000 %>" />
                         <input hidden name="gte" value="<%= 0 %>" />
                         <input class="" id="q_sell" name="type" type="submit" value="rent" hidden>

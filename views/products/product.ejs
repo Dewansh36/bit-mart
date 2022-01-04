@@ -57,6 +57,39 @@
             </form>
             </div>
             <div class="category-box d-flex flex-column justify-content-center align-items-center">
+              <h3 class="text-center">Filter</h3>
+              <form action="/products" method="get">
+                <input hidden name="category" value="<%= query.category %>" />
+                <input hidden name="page" value="1" />
+                <input hidden name="keyword" value="<%= query.keyword %>" />
+                <input hidden name="lte" value="<%= query.lte %>" />
+                <input hidden name="gte" value="<%= query.gte %>" />
+              <ul class="categoryBox">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="form-check ps-0 q-box my-3">
+                      <div class="q-box__question">
+                        <input class="form-check-input question__input q-checkbox" id="q_4_sell" name="type"
+                          type="checkbox" value="sell">
+                        <label class="form-check-label question__label" for="q_4_sell">BUY</label>
+                      </div>
+                    </div>
+                    <div class="form-check ps-0 q-box my-3">
+                      <div class="q-box__question">
+                        <input class="form-check-input question__input" id="q_4_rent" name="type" type="checkbox"
+                          value="rent">
+                        <label class="form-check-label question__label" for="q_4_rent">Rent</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-center align-items-center mt-4">
+                  <button class="b-btn" type="submit">Apply</button>
+                </div>
+              </ul>
+              </form>
+            </div>
+            <div class="category-box d-flex flex-column justify-content-center align-items-center">
               <h3 class="text-center">Categories</h3>
               <form action="/products" method="get">
                   <input hidden name="type" value="<%= query.type %>" />
@@ -70,42 +103,42 @@
                     <div class="form-check ps-0 q-box my-3">
                       <div class="q-box__question">
                         <input class="form-check-input question__input q-checkbox" id="q_4_laptop" name="category"
-                          type="radio" value="Laptops & Mobiles">
+                          type="checkbox" value="Laptops & Mobiles">
                         <label class="form-check-label question__label" for="q_4_laptop">Laptops & Mobiles</label>
 
                       </div>
                     </div>
                     <div class="form-check ps-0 q-box my-3">
                       <div class="q-box__question">
-                        <input class="form-check-input question__input" id="q_4_books" name="category" type="radio"
+                        <input class="form-check-input question__input" id="q_4_books" name="category" type="checkbox"
                           value="Books">
                         <label class="form-check-label question__label" for="q_4_books">Books</label>
                       </div>
                     </div>
                     <div class="form-check ps-0 q-box my-3">
                       <div class="q-box__question">
-                        <input class="form-check-input question__input" id="q_4_electrical" name="category" type="radio"
+                        <input class="form-check-input question__input" id="q_4_electrical" name="category" type="checkbox"
                           value="Electrical devices">
                         <label class="form-check-label question__label" for="q_4_electrical">Electrical devices</label>
                       </div>
                     </div>
                     <div class="form-check ps-0 q-box my-3">
                       <div class="q-box__question">
-                        <input class="form-check-input question__input" id="q_4_furniture" name="category" type="radio"
+                        <input class="form-check-input question__input" id="q_4_furniture" name="category" type="checkbox"
                           value="Furniture">
                         <label class="form-check-label question__label" for="q_4_furniture">Furniture</label>
                       </div>
                     </div>
                     <div class="form-check ps-0 q-box my-3">
                       <div class="q-box__question">
-                        <input class="form-check-input question__input" id="q_4_fashion" name="category" type="radio"
+                        <input class="form-check-input question__input" id="q_4_fashion" name="category" type="checkbox"
                           value="Fashion">
                         <label class="form-check-label question__label" for="q_4_fashion">Fashion</label>
                       </div>
                     </div>
                     <div class="form-check ps-0 q-box my-3">
                       <div class="q-box__question">
-                        <input class="form-check-input question__input" id="q_4_sports" name="category" type="radio"
+                        <input class="form-check-input question__input" id="q_4_sports" name="category" type="checkbox"
                           value="Sports gear">
                         <label class="form-check-label question__label" for="q_4_sports">Sports gear</label>
                       </div>
