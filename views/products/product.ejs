@@ -15,7 +15,6 @@
 <!-- FontAwesome -->
 <script src="https://kit.fontawesome.com/f6f38a44e9.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="/css/product.css" />
-
 <body>
   <!-- <header> -->
   <%- include('../partials/navbar') %>
@@ -24,8 +23,8 @@
       <h2 class="productsHeading text-center">Products</h2>
       <div class="products">
         <div class="filterBox">
-          <form action="/products" method="get">
             <div class="wrapper">
+              <form action="/products" method="get">
               <header>
                 <h2>Price Range</h2>
                 <p>Use slider or enter min and max price</p>
@@ -33,27 +32,38 @@
               <div class="price-input">
                 <div class="field">
                   <span style="color: #45ccb8;">Min</span>
-                  <input type="number" class="input-min" value="2500" />
+                  <input type="number" class="input-min" value="<%= query.gte %>" />
                 </div>
                 <div class="separator">-</div>
                 <div class="field">
                   <span style="color: #45ccb8;">Max</span>
-                  <input type="number" class="input-max" value="7500" />
+                  <input type="number" class="input-max" value="<%= query.lte %>" />
                 </div>
               </div>
               <div class="slider">
                 <div class="progress"></div>
               </div>
               <div class="range-input">
-                <input name="gte" type="range" class="range-min" min="0" max="10000" value="2500" step="100" />
-                <input name="lte" type="range" class="range-max" min="0" max="10000" value="7500" step="100" />
+                <input name="gte" type="range" class="range-min" min="0" max="10000" value="0" step="100" />
+                <input name="lte" type="range" class="range-max" min="0" max="10000" value="10000" step="100" />
+                <input hidden name="type" value="<%= query.type%>" />
+                <input hidden name="page" value="1" />
+                <input hidden name="keyword" value="<%= query.keyword %>" />
+                <input hidden name="category" value="<%= query.category %>" />
               </div>
               <div class="d-flex justify-content-center align-items-center mt-4">
                 <button class="b-btn" type="submit">Apply</button>
               </div>
+            </form>
             </div>
             <div class="category-box d-flex flex-column justify-content-center align-items-center">
               <h3 class="text-center">Categories</h3>
+              <form action="/products" method="get">
+                  <input hidden name="type" value="<%= query.type %>" />
+                  <input hidden name="page" value="1" />
+                  <input hidden name="keyword" value="<%= query.keyword %>" />
+                  <input hidden name="lte" value="<%= query.lte %>" />
+                  <input hidden name="gte" value="<%= query.gte %>" />
               <ul class="categoryBox">
                 <div class="row">
                   <div class="col-lg-12">
@@ -106,8 +116,8 @@
                   <button class="b-btn" type="submit">Apply</button>
                 </div>
               </ul>
+            </form>
             </div>
-          </form>
         </div>
         <div class="pd-layout">
           <div class="product-layout">
@@ -152,11 +162,16 @@
       </div>
       <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
-          <form action="/products" method="get">
+          <form action="" class="form-products" method="get">
             <li class="page-item disabled">
               <% if (page>1) { %>
                 <label class="b-btn mx-2" for="prev">Previous</label>
-                <input id="prev" type="submit" name="page" value="<%= page-1 %> " hidden>
+                <input hidden name="category" value="<%= query.category %>"/>
+                <input hidden name="type" value="<%= query.type%>" />
+                <input hidden name="keyword" value="<%= query.keyword%>" />
+                <input hidden name="gte" value="<%= query.gte%>" />" 
+                <input hidden name="lte" value="<%= query.lte%>" />
+                <input id="prev" hidden type="submit" name="page" value="<%= page-1 %>" />
                 <% } %>
                   <!-- <a class="page-link" href="#" tabindex="-1">Previous</a> -->
             </li>
@@ -165,11 +180,17 @@
           <!-- <li class="page-item"><a class="page-link" href="#">1</a></li>
           <li class="page-item"><a class="page-link" href="#">2</a></li>
           <li class="page-item"><a class="page-link" href="#">3</a></li> -->
-          <form action="/products" method="get">
+          <form action="/products" method="get" class="form-products">
             <li class="page-item">
               <% if (page<mxLength/6) { %>
                 <label class="b-btn mx-2" for="next">Next</label>
-                <input id="next" type="submit" name="page" value="<%= page+1 %>" hidden>
+                <input name="category" hidden  value="<%= query.category %>"/>
+                <input name="type" hidden value="<%= query.type%>" />
+                <input name="keyword" hidden value="<%= query.keyword%>" />
+                <input name="gte" hidden value="<%= query.gte%>" />
+                <input name="lte" hidden value="<%= query.lte%>" />
+                <input id="next" hidden type="submit" name="page" value="<%= page+1 %>" />
+                
                 <% } %>
 
                   <!-- <a class="page-link" href="#" tabindex="+1">Next</a> -->
@@ -186,7 +207,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
       crossorigin="anonymous"></script>
-
     <script src="/js/product.js"></script>
     <%- include('../partials/footer') %>
 </body>

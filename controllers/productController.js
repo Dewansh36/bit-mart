@@ -62,23 +62,24 @@ exports.createProduct=catchAsyncerror(async (req, res, next) => {
 });
 
 exports.getAllProducts=catchAsyncerror(async (req, res, next) => {
-  const resultperpage=6;
-  let sze=(await Product.find()).length;
-  const features=new Features(Product.find(), req.query)
-    .search()
-    .filter()
-    .type()
-    .pagination(resultperpage)
-  const products=await features.query
+  let resultperpage=6;
+  let features=new Features(Product.find(), req.query)
+    .filter();
+  let products=await features.query;
+  let sze=products.length;
+  features=new Features(Product.find(), req.query).filter().pagination(resultperpage)
+  products=await features.query;
   // res.send(req.query);
   // const product=await partialSearch(req.query.keyword);
-  // console.log(products);
   let currentPage=Number(req.query.page||1);
   // console.log(sze)
   if (!products) {
     return next(new Apperror('Product not found', 404))
   }
   // res.redirect()
+  // console.log(req.query);
+  req.query.gte=Number(req.query.gte||0);
+  req.query.lte=Number(req.query.lte||10000);
   res.render('products/product', { products, page: currentPage, mxLength: sze });
   // res.status(200).json({
   //   success: true,
@@ -101,7 +102,6 @@ exports.getProductDetails=catchAsyncerror(async (req, res, next) => {
   }
 
   let rno=(Number)(req.query.rno||2);
-  console.log(product.reviews);
 
   res.render('products/view', { product, end: rno });
   // res.status(200).json({
