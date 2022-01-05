@@ -3,7 +3,9 @@
 <html>
 
 <head>
-
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart</title>
     <link rel="icon" href="https://res.cloudinary.com/dewansh/image/upload/v1641149333/BitMart/Products/logo_lexsox.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
@@ -33,7 +35,7 @@
                                     <%= curUser.cartItems[index].cartItem.name %>
                                 </h3>
                                 <h4 class="product-price">
-                                    <%= curUser.cartItems[index].cartItem.price %>
+                                    <i class="fab fa-bitcoin"></i><%= curUser.cartItems[index].cartItem.price %>
                                 </h4>
                                 <p class="product-quantity">Qnt : <span class="qval">
                                         <%= curUser.cartItems[index].quantity %>

@@ -83,16 +83,22 @@
   color: #24262b;
   background-color: #ffffff;
 }
-
+#footerImg{
+  max-width: 25vw;
+}
 /*responsive*/
-@media (max-width: 767px) {
-  .f-footer-col {
-    width: 50%;
-    margin-bottom: 30px;
+@media (max-width: 996px) {
+  #footerImg{
+    max-width: 20vw !important;
+    height: 7rem;
   }
 }
 @media (max-width: 574px) {
   .f-footer-col {
     width: 100%;
+    margin-bottom: 30px;
+  }
+  #footerImg{
+    max-width: 60vw !important;
   }
 }
