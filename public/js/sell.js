@@ -2,7 +2,7 @@ let step=document.getElementsByClassName('step');
 let prevBtn=document.getElementById('prev-btn');
 let nextBtn=document.getElementById('next-btn');
 let submitBtn=document.getElementById('submit-btn');
-let form=document.getElementsByTagName('form')[0];
+let form=document.getElementById('form-wrapper');
 let bodyElement=document.querySelector('body');
 
 let current_step=0;

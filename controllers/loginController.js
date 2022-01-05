@@ -30,7 +30,10 @@ module.exports.register=async (req, res, next) => {
                 roll: req.body.roll
             }
         );
-
+        if (req.body.email.includes('@bitmesra.ac.in')==false) {
+            req.flash('error', 'You Must Enter with BIT Mesra email Id');
+            res.redirect('/signin');
+        }
         // res.send(user);
         const regUser=await User.register(user, req.body.password);
 
