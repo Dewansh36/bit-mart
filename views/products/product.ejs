@@ -18,6 +18,7 @@
 <body>
   <!-- <header> -->
   <%- include('../partials/navbar') %>
+  <%- include('../partials/backtotop') %> 
     <!-- </header> -->
     <main style="min-height: 100vh;">
       <h2 class="productsHeading text-center">Products</h2>
@@ -191,6 +192,7 @@
               <% } %>
           </div>
           <nav aria-label="Page navigation example" class="my-5">
+            <p class="text-center" style="color: #ffeba7;"><%= page%>/<%= Math.ceil(mxLength/6) %> </p>
             <ul class="pagination justify-content-center">
               <form action="" class="form-products" method="get">
                 <li class="page-item disabled">

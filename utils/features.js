@@ -74,7 +74,7 @@ class Features {
     // console.log(keyword);
     // console.log(max);
     // console.log(category);
-    console.log(type);
+    // console.log(type);
     if (category!=undefined&&type!=undefined) {
       this.query=this.query.find({ $and: [{ price: { $gte: min } }, { price: { $lte: max } }, { type: type }, { category: category }, { ...keyword }] });
     }
@@ -83,6 +83,9 @@ class Features {
     }
     else if (type!=undefined) {
       this.query=this.query.find({ $and: [{ price: { $gte: min } }, { price: { $lte: max } }, { type: type }, { ...keyword }] });
+    }
+    else {
+      this.query=this.query.find({ $and: [{ price: { $gte: min } }, { price: { $lte: max } }, { ...keyword }] });
     }
     // if (max==undefined && category==undefined) {
     //   this.query=this.query.find().limit(6);

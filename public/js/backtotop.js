@@ -1,14 +1,13 @@
-var btn = $('#btop');
+var btn=document.getElementById('btop');
 
-$(window).scroll(function() {
-  if ($(window).scrollTop() > 300) {
-    btn.addClass('show');
+window.onscroll=function () {
+  if (document.documentElement.scrollTop>30) {
+    btn.classList.add('show');
   } else {
-    btn.removeClass('show');
+    btn.classList.remove('show');
   }
-});
+}
 
-btn.on('click', function(e) {
-  e.preventDefault();
-  $('html, body').animate({scrollTop:0}, '300');
+btn.addEventListener('click', function () {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 });

@@ -65,6 +65,7 @@ exports.getAllProducts=catchAsyncerror(async (req, res, next) => {
   let resultperpage=6;
   console.log(req.query);
   let features=new Features(Product.find(), req.query)
+    .search()
     .filter();
   let products=await features.query;
   let sze=products.length;
@@ -79,6 +80,9 @@ exports.getAllProducts=catchAsyncerror(async (req, res, next) => {
   }
   // res.redirect()
   // console.log(req.query);
+  if (products.length==0) {
+    res.render('products/noproducts');
+  }
   req.query.gte=Number(req.query.gte||0);
   req.query.lte=Number(req.query.lte||10000);
   let left=((req.query.gte/10000)*100)+"%";
