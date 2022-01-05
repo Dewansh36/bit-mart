@@ -75,3 +75,13 @@
   .navbar-light .navbar-nav .active i{
     color: var(--primary-color)!important;
   }
+  @media only screen and (max-width: 996px) {
+    .navbar-light .navbar-nav .nav-item{
+      display: block;
+    }
+    .navbar-light .navbar-nav .nav-link{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
