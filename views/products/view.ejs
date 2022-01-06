@@ -228,7 +228,9 @@
                          <% } else { %>
                           <img class="img-fluid my-5" style="height: 12rem;" id="noreviews" src="https://www.denmakers.in/img/no-review-found.png" alt="">
                         <% } %>
-                        <p style="color: #45ccb8;"><%= end %>/<%= product.reviews.length %>  </p>
+                        <% if (product.reviews.length) { %>
+                            <p style="color: #45ccb8;"><%= Math.min(end,product.reviews.length) %>/<%= product.reviews.length %>  </p>
+                        <% } %>
                         <nav aria-label="Page navigation example">
                             <ul class="pagination justify-content-center">
                               <form action="/products/<%= product.id %> " method="get">

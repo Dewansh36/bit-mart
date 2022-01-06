@@ -27,12 +27,13 @@
             <h1 style="color: #45ccb8;"> Shopping Cart</h1>
             <div class="cart">
                 <div class="products">
+                    <% if (curUser.cartItems.length) { %>
                     <% for( let index=0;index<Math.min(total,curUser.cartItems.length);index++ ) { %>
                         <div class="product" id="<%= index+1 %> ">
                             <img src="<%= curUser.cartItems[index].cartItem.images[0].url %> ">
                             <div class="product-info">
                                 <h3 class="product-name">
-                                    <%= curUser.cartItems[index].cartItem.name %>
+                                    <a href="/products/<%= curUser.cartItems[index].cartItem.id %>"><%= curUser.cartItems[index].cartItem.name %></a>
                                 </h3>
                                 <h4 class="product-price">
                                     <i class="fab fa-bitcoin"></i><%= curUser.cartItems[index].cartItem.price %>
@@ -52,7 +53,15 @@
                             </div>
                         </div>
                         <% } %>
+                         <% } else { %>
+                            <h2 style="text-align: center; color: #ffeba7;" class="mt-5">Hey,it feels so light!</h2>
+                            <h6 style="text-align: center; color: #ffeba7;" class="mb-5">There is nothing in your bag.Let's add some items</h6>
+                                <img src="https://res.cloudinary.com/dewansh/image/upload/v1641390675/BitMart/Products/b1-removebg-preview_j0b84g.png" class="img-fluid text-center" style="height: 60vh; text-align: center;">
+                        <% } %>
                         <nav aria-label="Page navigation example">
+                            <% if (curUser.cartItems.length) { %>
+                                <p class="text-center" style="color: #ffeba7;"><%= Math.min(total,curUser.cartItems.length) %>/<%= curUser.cartItems.length %> </p>
+                            <% } %>
                             <ul class="pagination justify-content-center">
                               <form action="/cart" method="get">
                                 <li class="page-item disabled">
@@ -65,6 +74,7 @@
                             </ul>
                           </nav>
                 </div>
+                <% if (curUser.cartItems.length) { %>
                 <div class="cart-total">
                     <p>
                         <span>Number of Items</span>
@@ -82,6 +92,7 @@
 
                     <a href="/order">Proceed to Checkout</a>
                 </div>
+                <% } %>
             </div>
         </div>
             <script type="text/javascript"
