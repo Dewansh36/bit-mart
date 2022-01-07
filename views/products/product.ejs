@@ -46,8 +46,8 @@
                 <div class="progress" style="left: <%= left %> ; right: <%= right %> ;"></div>
               </div>
               <div class="range-input">
-                <input name="gte" type="range" class="range-min" min="0" max="10000" value="<%= query.gte %>" step="100" />
-                <input name="lte" type="range" class="range-max" min="0" max="10000" value="<%= query.lte %>" step="100" />
+                <input name="gte" type="range" class="range-min" min="0" max="10000" id="rangeMin" value="<%= query.gte %>" step="100" />
+                <input name="lte" type="range" class="range-max" min="0" max="10000" id="rangeMax" value="<%= query.lte %>" step="100" />
                 <input hidden name="type" value="<%= query.type%>" />
                 <input hidden name="page" value="1" />
                 <input hidden name="keyword" value="<%= query.keyword %>" />

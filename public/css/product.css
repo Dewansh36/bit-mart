@@ -342,7 +342,7 @@ q__question {
 }
 
 input:focus {
-  color: #ffeba7;
+  /* color: #ffeba7; */
   outline: none;
 }
 
