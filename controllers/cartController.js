@@ -13,8 +13,8 @@ module.exports.addProduct=async (req, res, next) => {
     const user=await User.findById(req.user.id)
         .populate({
             path: 'cartItems',
-            populate:{
-                path:'cartItem'
+            populate: {
+                path: 'cartItem'
             }
         });
     const product=await Product.findById(id);
@@ -35,9 +35,8 @@ module.exports.addProduct=async (req, res, next) => {
         for (let carti of user.cartItems) {
             if (carti.cartItem.id==product.id) {
                 carti.quantity+=item.quantity;
-                if(carti.quantity>product.quantity)
-                {
-                    req.flash('error','Not Enough Products In Stock');
+                if (carti.quantity>product.quantity) {
+                    req.flash('error', 'Not Enough Products In Stock');
                     res.redirect(`/products/${product.id}`);
                     return;
                 }
@@ -50,8 +49,6 @@ module.exports.addProduct=async (req, res, next) => {
             await item.save();
             user.cartItems.push(item);
         }
-        // console.log(item, user, product);
-        // res.send('Ok!');
         await user.save();
         req.flash('success', 'Product Successfully Added to the Cart');
         res.redirect(`/products/${id}`);
@@ -72,7 +69,6 @@ module.exports.removeProduct=async (req, res, next) => {
         }
     }
     await Cart.findByIdAndDelete(id);
-    // console.log(item, user, product);
     await user.save();
     await product.save();
     req.flash('success', 'Product Successfully Removed From Cart');
@@ -92,15 +88,12 @@ module.exports.viewCart=async (req, res, next) => {
         });
 
     let total=(Number)(req.query.total||4);
-    // console.log(curUser.cartItems[0].cartItem.images[0]);
     curUser.cartItems=curUser.cartItems.filter((item) => { return item.cartItem!=null });
     await curUser.save();
     let totalPrice=0;
-    for(item of curUser.cartItems)
-    {
+    for (item of curUser.cartItems) {
         totalPrice+=(item.cartItem.price*item.quantity);
     }
-    // res.send('Ok!');
-    res.render('cart/cart', { curUser,total: total,totalPrice: totalPrice });
+    res.render('cart/cart', { curUser, total: total, totalPrice: totalPrice });
 }
 
