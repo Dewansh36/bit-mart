@@ -82,6 +82,7 @@ exports.getAllProducts=catchAsyncerror(async (req, res, next) => {
   // console.log(req.query);
   if (products.length==0) {
     res.render('products/noproducts');
+    return;
   }
   req.query.gte=Number(req.query.gte||0);
   req.query.lte=Number(req.query.lte||10000);

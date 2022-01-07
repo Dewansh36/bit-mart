@@ -44,7 +44,7 @@ body {
   height: 8%;
 }
 
-.searchBox > input[type="submit"] {
+#btnSubmit {
   height: 8%;
   border-radius: 0%;
   background-color: var(--primary-color);
@@ -57,11 +57,11 @@ body {
   color: white;
   transition: all 0.5s;
 }
-.searchBox > input[type="submit"]:hover {
+#btnSubmit:hover {
   background-color: coral;
 }
 @media only screen and (max-width: 967px) {
-  .searchBox > input[type="submit"] {
+  #btnSubmit {
     width: 25%;
     font-size: 1.5rem;
   }
