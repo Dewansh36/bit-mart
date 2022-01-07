@@ -138,13 +138,14 @@ app.get('/aboutus', (req, res) => {
 app.use(errorMiddleware)
 
 
-app.get('*', (req, res, next) => {
-    res.render('404');
-});
-
 app.use((err, req, res, next) => {
-    let { message, status }=err;
-    res.status(status).send(message);
+    let { status=500 }=err;
+    // console.log(err);
+    res.status(status).render('404', { err, status });
 });
 
+
+app.get('*', (req, res, next) => {
+    res.status(404).render('404', { status: 404 });
+});
 
