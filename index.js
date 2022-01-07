@@ -46,8 +46,8 @@ store.on('error', function (e) {
     console.log(e);
 });
 
-app.listen(3000, () => {
-    console.log('Listning on Port 3000');
+app.listen(process.env.PORT, () => {
+    console.log(`Listning on Port ${process.env.PORT}`);
 });
 //Setting ejs and views Directory
 
