@@ -1,16 +1,32 @@
 # Bit-Mart
 
-# Contents
+## Contents
 
 - [Domain](#Domain)
+- [Team](#Team)
+- [Tech-Stack](#Tech-Stack)
 - [Pictures](#Picture)
 - [Idea](#Idea)
 - [Achievement](#Achievement)
+- [How-to-Run](#How-to-run)
 - [Link](#Link)
 
 ### Domain
 
 - Full-Stack Web Development
+
+### Team
+
+- Team Name: DLP
+- Linken Vashistha(BTECH/10385/20)
+- Dewansh Chandra(BTECH/10108/20)
+- Parthiv Sarkar(BTECH/10268/20)
+
+### Tech-Stack
+
+- Frontend: HTML(EJS), CSS, JS.
+- Backend: NodeJs.
+- DataBase: MongoDB
 
 ### Picture
 
@@ -21,8 +37,7 @@
 
 ### Idea
 
-- To create a bridge between students of BIT in trading goods with Full Trust.
-  We have created a platform which can help students in trading goods which includes rental services as well.
+- We have created website which helps in buying selling and renting of goods around the entire campus. We have created a safe and secure website which can be accessed only by the BIT-MESRA students and can be registered using the college email id. Thus only students who belong to this college can easily buy or sell their products or goods which can come in handy for someone else.
 
 ### Achievement
 
@@ -33,9 +48,17 @@
 - Cart & WishList: So that You can save your
   liked products and Buy them in case you want using bitmart coins.
 - Data Protection: So that no one else including the admins can delete or edit any of the products or reviews provided in the platform.
-- Order History: Keep Track of All your purchased goods
+- Order History: Keep Track of All your purchased goods.
+- Product History: Keeping Track of all the products you have listed.
+
+### How-to-run
+
+- Fork our Repository.
+- Install node in your local.
+- Enter command - (npm i) to install node modules.
+- Enter command - (npm run dev) to run on your local host.
 
 ### Link
 
-- You can access our website from the following link :
+- You can access our website from the following link : https://bit-mart.herokuapp.com/
 - Register Yourself using your verified email id and start buying/selling the products.

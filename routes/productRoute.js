@@ -9,8 +9,7 @@ const upload=multer({ storage });
 
 router.route("/")
     .get(getAllProducts);
-// router.route('/search')
-//     .get(getAllProducts);
+
 router.route("/new")
     .get(checkLogin, renderCreate)
     .post(checkLogin, upload.array('images'), createProduct);

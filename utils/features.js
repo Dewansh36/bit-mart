@@ -71,10 +71,7 @@ class Features {
     if (type==[]||type=='') {
       type=undefined;
     }
-    // console.log(keyword);
-    // console.log(max);
-    // console.log(category);
-    // console.log(type);
+    
     if (category!=undefined&&type!=undefined) {
       this.query=this.query.find({ $and: [{ price: { $gte: min } }, { price: { $lte: max } }, { type: type }, { category: category }, { ...keyword }] });
     }
@@ -87,19 +84,6 @@ class Features {
     else {
       this.query=this.query.find({ $and: [{ price: { $gte: min } }, { price: { $lte: max } }, { ...keyword }] });
     }
-    // if (max==undefined && category==undefined) {
-    //   this.query=this.query.find().limit(6);
-    // }
-    // else if (max==undefined) {
-    //   this.query=this.query.find({ $and: [{ category: category }] });
-    // }
-    // else if (category==undefined) {
-    //   this.query=this.query.find({ $and: [{ price: { $gte: min } }, { price: { $lte: max } }] });
-    // }
-    // else {
-    //   this.query=this.query.find({ $and: [{ price: { $gte: min } }, { price: { $lte: max } }, { category: category }] });
-    //   // this.query=this.query.find({ $and: [{ category: category }] });
-    // }
     return this;
   }
   pagination(resultperpage) {
@@ -110,7 +94,7 @@ class Features {
     else {
       currentpage=Number(this.queryStr.page);
     }
-    // console.log(currentpage);
+    
     let skip=resultperpage*(currentpage-1);
 
     this.query=this.query.limit(resultperpage).skip(skip)

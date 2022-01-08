@@ -10,10 +10,6 @@ router.route('/')
 
 router.route('/:id')
     .get(checkLogin, catchAsync(cartController.addProduct))
-    // .get(checkLogin, (req, res) => {
-    //     console.log(req.params, req.query);
-    //     res.send('Ok!');
-    // })
     .delete(checkLogin, catchAsync(cartController.removeProduct));
 
 module.exports=router;

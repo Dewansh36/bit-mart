@@ -40,7 +40,7 @@ h6 span {
   width: 100%;
   display: block;
 }
-.container{
+.container {
   height: 90vh;
 }
 .full-height {
@@ -119,7 +119,7 @@ h6 span {
   position: absolute;
   border-radius: 6px;
   left: 0;
-  /* top: 25%; */
+
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
   -webkit-backface-visibility: hidden;

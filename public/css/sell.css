@@ -132,16 +132,6 @@ button#submit-btn {
   box-shadow: 0 8px 24px 0 rgba(255, 235, 167, 0.2);
 }
 
-/* button#prev-btn:active,
-button#next-btn:active,
-button#submit-btn:active,
-button#prev-btn:focus,
-button#next-btn:focus,
-button#submit-btn:focus {
-  background-color: #102770;
-  color: #ffeba7;
-  box-shadow: 0 8px 24px 0 rgba(16, 39, 112, 0.2);
-} */
 button#prev-btn:hover,
 button#next-btn:hover,
 button#submit-btn:hover {
@@ -283,7 +273,7 @@ input[type="file"]:focus {
 .form-check-input:checked[type="radio"]:active {
   background-color: #1f2029;
   border: none !important;
-  /* -webkit-outline: 0px !important; */
+
   box-shadow: none !important;
   color: #ffeba7;
 }

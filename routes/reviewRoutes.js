@@ -14,9 +14,6 @@ router.route('/new')
     .post(checkLogin, upload.array('images'), catchAsyncerror(reviewController.create))
 router.route('/:rid')
     .delete(checkLogin, checkReviewAuth, catchAsyncerror(reviewController.delete));
-// router.route('/:rid')
-//     .delete(checkLogin, checkReviewAuth, (req, res) => {
-//         res.send('Got Dele')
-//     });
+
 
 module.exports=router;

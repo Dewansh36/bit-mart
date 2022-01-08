@@ -1,26 +1,22 @@
-/* Set rates + misc */
+
 let taxRate=0.05;
 let fadeTime=300;
 let p=document.getElementsByClassName('products');
 let len=parseInt(p[0].children.length);
-// console.log(len);
+
 let products=document.getElementsByClassName('product-info');
-// console.log(products);
-// console.log(products[0].children[1].innerText)
+
 let price=document.getElementsByClassName('products')
-// console.log(price[0].children[0].children[1].children[1].innerText);
-// console.log(price[0].children[1].children[1].children[1].innerText);
-/* Recalculate cart */
+
 
 let tot=0;
 for (let i=0; i<len; i++) {
-  // let quantity=parseInt(document.getElementById('qval').textContent);
-  // console.log(products[i].children[2].children[0].innerText);
+  
   let quantity=parseInt(products[i].children[2].children[0].innerText);
   tot+=(quantity*parseFloat(products[i].children[1].innerText));
 }
 let tax=(tot*taxRate);
-// console.log(tax);
+
 tot=tot+tax;
 tax=tax.toFixed(2);
 tot=tot.toFixed(2);

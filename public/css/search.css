@@ -21,12 +21,11 @@ body {
 .searchBox {
   width: 100vw;
   height: 100vh;
-  /* max-width: 100%; */
+
   display: flex;
   justify-content: center;
   align-items: center;
   position: fixed;
-  /* top: 20%; */
 }
 
 .searchBox > input[type="text"] {
