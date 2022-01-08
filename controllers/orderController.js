@@ -23,7 +23,7 @@ exports.renderOrders=async (req, res, next) => {
       res.redirect('/cart')
       return;
    }
-   res.render('cart/payment', { totalPrice: totalPrice, totalItems: curUser.cartItems.length, bucks: 2000 });
+   res.render('cart/payment', { totalPrice: totalPrice, totalItems: curUser.cartItems.length, bucks: curUser.coins });
 
 }
 
@@ -61,11 +61,9 @@ exports.newOrder=catchAsyncerror(async (req, res, next) => {
             phoneNo: phoneNo
          }
       });
-      if (User.exists({ id: product.creator.id })==true) {
-         let seller=await User.findById(product.creator.id);
-         seller.coins+=item.quantity*product.price;
-         await seller.save();
-      }
+      let seller=await User.findById(product.creator.id);
+      seller.coins+=(item.quantity*product.price);
+      await seller.save();
       curUser.coins-=item.quantity*product.price;
       order.orderItem=item.cartItem.id;
       order.createdAt=new Date(Date.now()).toDateString()+" "+new Date(Date.now()).toLocaleTimeString();
