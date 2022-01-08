@@ -22,7 +22,6 @@ module.exports.renderSignin=(req, res) => {
 module.exports.register=async (req, res, next) => {
     try {
         console.log(req.body);
-        // res.send(req.body);
         const user=new User(
             {
                 name: req.body.name,
@@ -34,11 +33,8 @@ module.exports.register=async (req, res, next) => {
             req.flash('error', 'You Must Enter with BIT Mesra email Id');
             res.redirect('/signin');
         }
-        // res.send(user);
         const regUser=await User.register(user, req.body.password);
 
-        // console.log(regUser);
-        // res.send(regUser);
 
         req.logIn(regUser, (err) => {
             if (err) {
@@ -53,10 +49,7 @@ module.exports.register=async (req, res, next) => {
             return;
         }
         const curUser=regUser;
-        // console.log(curUser);
-        // res.send(curUser);
         res.redirect('/');
-        // res.render('selectPage', { curUser });
     }
     catch (err) {
         console.log(err);
@@ -73,7 +66,6 @@ module.exports.login=(req, res, next) => {
         return;
     }
     req.flash('success', 'Welcome Back!');
-    // console.log(curUser);
     res.redirect('/');
 }
 
@@ -159,13 +151,6 @@ module.exports.reset=async (req, res, next) => {
             res.redirect('/signin');
         }
     })
-    // if (err) {
-    //     req.flash('error', 'Password Reset Failed!');
-    //     res.redirect('/forgot');
-    // }
-    // else {
-    //     
-    // }
 
 }
 

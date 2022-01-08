@@ -13,7 +13,6 @@ module.exports.profile=async (req, res, next) => {
 module.exports.renderedit=async (req, res, next) => {
     let { id }=req.params;
     const user=await User.findById(id);
-    // console.log(user);
     res.render('user/edit', { user });
 }
 

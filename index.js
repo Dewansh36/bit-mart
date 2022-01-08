@@ -11,10 +11,7 @@ const path=require('path');
 const methodOverride=require('method-override');
 const User=require('./models/user');
 const Product=require('./models/productModel');
-const Apperror=require('./utils/errorClass');
 require('dotenv').config();
-const { nanoid }=require('nanoid');
-const nodemailer=require('nodemailer');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 

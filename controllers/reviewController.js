@@ -7,7 +7,6 @@ const cloudinary=require('cloudinary').v2;
 
 module.exports.create=async (req, res, next) => {
     console.log(req.body, req.files);
-    // res.send('ok!');
     let { id }=req.params;
     const review=new Review(req.body);
     review.creator=req.user.id;
@@ -51,7 +50,7 @@ module.exports.delete=async (req, res, next) => {
     }
     for (image of review.images) {
         cloudinary.uploader.destroy(image.public_id, (err, result) => {
-            console.log(result);
+            console.log('Deleted Image!');
         });
     }
     product.rating=Math.max((product.rating*product.noOfReviews-review.rating), 0);

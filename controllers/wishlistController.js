@@ -20,8 +20,6 @@ module.exports.addProduct=async (req, res, next) => {
     }
     else {
         user.wishList.push(product);
-        // console.log(item, user, product);
-        // res.send('Ok!');
         await user.save();
         req.flash('success', 'Product Successfully WishListed');
         res.redirect(`/products/${id}`);
@@ -38,7 +36,6 @@ module.exports.removeProduct=async (req, res, next) => {
             break;
         }
     }
-    // console.log(item, user, product);
     await user.save();
     req.flash('success', 'Product Successfully Removed From WishList');
     res.redirect('/wishlist');
@@ -52,9 +49,9 @@ module.exports.viewWishList=async (req, res, next) => {
                 path: 'images'
             }
         });
-        let total=(Number)(req.query.total||4);
-        curUser.wishList=curUser.wishList.filter((item) => { return item!=null });
-        await curUser.save();
-    res.render('cart/wishlist', { curUser,total: total });
+    let total=(Number)(req.query.total||4);
+    curUser.wishList=curUser.wishList.filter((item) => { return item!=null });
+    await curUser.save();
+    res.render('cart/wishlist', { curUser, total: total });
 }
 

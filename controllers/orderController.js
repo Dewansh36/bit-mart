@@ -78,10 +78,6 @@ exports.newOrder=catchAsyncerror(async (req, res, next) => {
    await curUser.save();
    req.flash('success', 'Order have been Successfully Placed');
    res.redirect('/');
-   // res.status(201).json({
-   //    success: true,
-   //    curUser
-   // });
 })
 
 exports.myOrders=catchAsyncerror(async (req, res, next) => {
@@ -92,12 +88,6 @@ exports.myOrders=catchAsyncerror(async (req, res, next) => {
             path: 'orderItem'
          }
       });
-   // console.log(curUser.orders);
    let orders=Number(req.query.orders||3);
    res.render('cart/orders', { curUser, orders: orders });
-
-   // res.status(200).json({
-   //    success: true,
-   //    orders
-   // })
 })

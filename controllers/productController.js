@@ -18,7 +18,6 @@ exports.renderEdit=async (req, res, next) => {
 }
 
 exports.createProduct=catchAsyncerror(async (req, res, next) => {
-  // console.log(req.body, req.files);
   try {
     const product=new Product(req.body);
     product.creator=req.user.id;
@@ -47,13 +46,8 @@ exports.createProduct=catchAsyncerror(async (req, res, next) => {
     user.products.push(product);
     await product.save();
     await user.save();
-    console.log(user, product);
     req.flash('success', 'Product Created!');
     res.redirect(`/products/${product.id}`);
-    // res.status(201).json({
-    //   success: true,
-    //   product,
-    // })
   }
   catch (err) {
     req.flash('error', err.message);
@@ -63,23 +57,16 @@ exports.createProduct=catchAsyncerror(async (req, res, next) => {
 
 exports.getAllProducts=catchAsyncerror(async (req, res, next) => {
   let resultperpage=6;
-  console.log(req.query);
+  console.log("Query: ", req.query);
   let features=new Features(Product.find(), req.query)
     .search()
     .filter();
   let products=await features.query;
   let sze=products.length;
-  // res.send(req.query);
-  // const product=await partialSearch(req.query.keyword);
   let currentPage=Number(req.query.page||1);
-  // console.log(currentPage);
-  // console.log(products);
-  // console.log(sze)
   if (!products) {
     return next(new Apperror('Product not found', 404))
   }
-  // res.redirect()
-  // console.log(req.query);
   if (products.length==0) {
     res.render('products/noproducts');
     return;
@@ -88,12 +75,7 @@ exports.getAllProducts=catchAsyncerror(async (req, res, next) => {
   req.query.lte=Number(req.query.lte||10000);
   let left=((req.query.gte/10000)*100)+"%";
   let right=100-(req.query.lte/10000)*100+"%";
-  console.log(left, right);
   res.render('products/product', { products, page: currentPage, mxLength: sze, left: left, right: right });
-  // res.status(200).json({
-  //   success: true,
-  //   product,
-  // })
 })
 
 exports.getProductDetails=catchAsyncerror(async (req, res, next) => {
@@ -107,16 +89,13 @@ exports.getProductDetails=catchAsyncerror(async (req, res, next) => {
     .populate('creator');
 
   if (!product) {
-    return next(new Apperror('Product not found', 404))
+    res.render('products/noproducts');
+    return;
   }
 
   let rno=(Number)(req.query.rno||2);
 
   res.render('products/view', { product, end: rno });
-  // res.status(200).json({
-  //   success: true,
-  //   product,
-  // })
 });
 
 exports.updateProduct=catchAsyncerror(async (req, res, next) => {
@@ -167,10 +146,6 @@ exports.updateProduct=catchAsyncerror(async (req, res, next) => {
     req.flash('success', 'Successfully Updated Product!');
     res.redirect(`/products/${product.id}`);
 
-    // res.status(200).json({
-    //   success: true,
-    //   product,
-    // })
   }
   catch (err) {
     req.flash('error', err.message);
