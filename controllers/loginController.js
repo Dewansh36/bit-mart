@@ -32,6 +32,7 @@ module.exports.register=async (req, res, next) => {
         if (req.body.email.includes('@bitmesra.ac.in')==false) {
             req.flash('error', 'You Must Enter with BIT Mesra email Id');
             res.redirect('/signin');
+            return;
         }
         const regUser=await User.register(user, req.body.password);
 
