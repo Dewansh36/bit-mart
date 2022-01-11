@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Password Reset Page</title>
+    <title>Verify Email Address</title>
     <link rel="icon" href="https://res.cloudinary.com/dewansh/image/upload/v1641149333/BitMart/Products/logo_lexsox.png">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
@@ -25,22 +25,36 @@
                         alt="" style="max-height: 20vh;"></a></h6>
                     <div class="col-12 text-center align-self-center py-5">
                         <div class="section pb-5 pt-5 pt-sm-2 text-center">
-                            <h6 class="mb-0 pb-3"><span>Reset Password </span></h6>
+                            <h6 class="mb-0 pb-3"><span>Verify Email </span></h6>
                             <div class="card-3d-wrap mx-auto">
                                 <div class="card-3d-wrapper">
                                     <div class="card-front">
                                         <div class="center-wrap">
                                             <div class="section text-center">
-                                                <form action="/reset/<%=token %>" method="post">
-                                                    <h4 class="mb-4 pb-3">Create a New Password</h4>
+                                                <form action="/verify" method="post">
                                                     <div class="form-group">
+                                                        <input type="text" name="name" class="form-style"
+                                                            placeholder="Your Full Name" id="name" autocomplete="off" value="<%= curUser.name %>" >
+                                                        <i class="input-icon uil uil-user"></i>
+                                                    </div>
+                                                    <div class="form-group mt-2">
+                                                        <input type="email" name="email" class="form-style"
+                                                            placeholder="Your Email" id="email" autocomplete="off" value="<%= curUser.email %>">
+                                                        <i class="input-icon uil uil-at"></i>
+                                                    </div>
+                                                    <div class="form-group mt-2">
+                                                        <input type="text" name="roll" class="form-style"
+                                                            placeholder="Your Roll no." id="roll" autocomplete="off" value="<%= curUser.roll %>">
+                                                        <i class="input-icon uil uil-notes"></i>
+                                                    </div>
+                                                    <div class="form-group mt-2">
                                                         <input type="password" name="password" class="form-style"
-                                                            placeholder="Your Password" id="pass" autocomplete="off">
+                                                            placeholder="Your Password" id="pass" autocomplete="off" value="<%= curUser.password %>">
                                                         <i class="input-icon uil uil-lock-alt"></i>
                                                     </div>
                                                     <div class="form-group mt-2">
-                                                        <input type="text" name="cpass" class="form-style"
-                                                            placeholder="Cofirm Password" id="pass" autocomplete="off">
+                                                        <input type="text" name="code" class="form-style"
+                                                            placeholder="Verification Code" id="code" autocomplete="off">
                                                         <i class="input-icon uil uil-lock-alt"></i>
                                                     </div>
                                                     <button class="b-btn mt-4">submit</button>

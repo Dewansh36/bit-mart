@@ -132,17 +132,14 @@ app.get('/aboutus', (req, res) => {
     res.render('aboutus');
 })
 
-app.use(errorMiddleware)
-
 
 app.use((err, req, res, next) => {
-    let { status=500 }=err;
+    let { status=500, message='Error Occurred!' }=err;
     // console.log(err);
-    res.status(status).render('404', { err, status });
+    res.status(status).render('404', { status, message });
 });
 
-
 app.get('*', (req, res, next) => {
-    res.status(404).render('404', { status: 404 });
+    res.status(404).render('404', { status: 404, message: 'Page Not Found!' });
 });
 
