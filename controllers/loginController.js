@@ -21,7 +21,6 @@ module.exports.renderSignin=(req, res) => {
 
 module.exports.register=async (req, res, next) => {
     try {
-        console.log(req.body);
         const user=new User(
             {
                 name: req.body.name,

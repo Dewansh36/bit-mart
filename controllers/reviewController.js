@@ -9,6 +9,7 @@ module.exports.create=async (req, res, next) => {
     console.log(req.body, req.files);
     let { id }=req.params;
     const review=new Review(req.body);
+    review.rating=(Number)(req.body.rating);
     review.creator=req.user.id;
     for (let file of req.files) {
         let img={
@@ -37,7 +38,9 @@ module.exports.delete=async (req, res, next) => {
     let product=await Product.findById(id).populate('reviews');
     let review=await Review.findById(rid)
         .populate('images');
-    console.log(review);
+    review.rating=(Number)(review.rating);
+    product.rating=(Number)(product.rating);
+    product.noOfReviews=(Number)(product.noOfReviews);
     if (product==undefined) {
         throw new Apprerror('Product Not Found', 404);
         return;
@@ -55,7 +58,7 @@ module.exports.delete=async (req, res, next) => {
     }
     product.rating=Math.max((product.rating*product.noOfReviews-review.rating), 0);
     product.noOfReviews--;
-    product.rating=(product.rating/product.noOfReviews);
+    product.rating=(Number)(product.rating/product.noOfReviews);
     await Review.findByIdAndDelete(rid);
     await product.save();
     req.flash('success', 'Review Deleted Successfully!');
