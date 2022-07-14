@@ -15,6 +15,10 @@ router.route('/login')
 router.route('/register')
     .post(catchAsync(login.register));
 
+router.route('/verify')
+    .get(catchAsync(login.verify))
+    .post(catchAsync(login.verify));
+
 router.route('/logout')
     .get(login.logout);
 
