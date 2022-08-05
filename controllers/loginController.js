@@ -95,6 +95,7 @@ module.exports.register=async (req, res, next) => {
         }
         else {
             console.log(info.response);
+            // req.flash('success', 'Verification mail sent Successfully!');
             res.render('user/verify', { curUser: req.body })
         }
     })
